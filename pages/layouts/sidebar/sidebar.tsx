@@ -31,6 +31,23 @@ export default function Sidebar() {
 			});
 	}
 
+	const [stateImage, setStateImage] = useState(false);
+	const imageState = (state: any) => {
+		if (state === !state) {
+			return "available";
+		} else {
+			return "locked";
+		}
+	};
+
+	const available = imageState(status);
+	let imageURL = "";
+
+	if (available === "available") imageURL = "lock.svg";
+	else imageURL = "star.svg";
+
+	console.log(available);
+
 	// if (ethereumAccount === null) {
 	// 	return (
 	// 		<>
@@ -68,6 +85,13 @@ export default function Sidebar() {
 									<Link className={styles.menu_links} href={item.path}>
 										<p className={styles.menu_title}>{item.title}</p>
 									</Link>
+									<Image
+										className={styles.lock_icon}
+										src="/image/lock-circle.svg"
+										width={20}
+										height={20}
+										alt="lock"
+									/>
 								</div>
 							</div>
 						);

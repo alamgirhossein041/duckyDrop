@@ -8,7 +8,7 @@
 	justify-content: center;
 	align-items: center;
 	padding-bottom: 20px;
-	padding-top: 32px;
+	padding-top: 36px;
 	gap: 12px;
 	.connect_button {
 		font-family: $font1;
@@ -34,26 +34,32 @@
 	position: fixed;
 	top: 0;
 	left: 0;
+
 	.navbar_wrapper {
 		display: flex;
 		width: 100%;
-	}
-	.icon_wrapper {
-		display: flex;
-		justify-content: center;
-	}
-	.menu_wrapper {
-		display: flex;
+		padding-top: 28px;
+		gap: 12px;
+		padding-left: 2rem;
 		justify-content: center;
 		align-items: center;
 	}
-	.menu_links {
+	.icon_wrapper {
+		// height: 8px;
+		//display: flex;
+		//justify-content: center;
+	}
+	.menu_wrapper {
 		display: flex;
-		// align-items: center;
+		width: 100%;
+		padding-right: 1.3rem;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.menu_links {
+		// display: flex;
 		font-family: $font1;
 		text-decoration: none;
-		//justify-content: left;
-		padding-left: 2em;
 		&:hover {
 			//background-color: white;
 			//width: 100%;
@@ -64,9 +70,9 @@
 		}
 		.menu_title {
 			color: $white;
-			font-size: $font-lg;
+			font-size: 16px;
+			font-weight: 600;
 			margin-left: 16px;
-			padding: 18px 0 0 18px;
 		}
 	}
 }
