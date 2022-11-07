@@ -1,26 +1,48 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+	font-family: "Poppins-Regular";
+	src: url("/fonts/Poppins-Regular.otf");
 }
-
+@font-face {
+	font-family: "Poppins-SemiBold";
+	src: url("/fonts/Poppins-SemiBold.otf");
+}
+@font-face {
+	font-family: "Poppins-Bold";
+	src: url("/fonts/Poppins-Bold.otf");
+}
+@font-face {
+	font-family: "Chillax-Medium";
+	src: url("/fonts/Chillax-Medium.ttf");
+}
+@font-face {
+	font-family: "MonumentExtended-Regular";
+	src: url("/fonts/MonumentExtended-Regular.otf");
+}
+@font-face {
+	font-family: "MonumentExtended-Ultrabold";
+	src: url("/fonts/MonumentExtended-Ultrabold.otf");
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
 a {
-  color: inherit;
-  text-decoration: none;
+	font-family: "Poppins";
 }
 
 * {
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+a {
+	text-decoration: none;
+}
+
+button {
+	font-family: "Poppins-Regular";
 }
