@@ -8,13 +8,12 @@
 	justify-content: center;
 	align-items: center;
 	padding-bottom: 20px;
-	padding-top: 36px;
+	padding-top: 32px;
 	gap: 12px;
 	.connect_button {
 		font-family: $font1;
 		font-size: $font-lg;
 		font-weight: 600;
-		//color: $gradient-main;
 		width: 220px;
 		border: none;
 		border-radius: 42px;
@@ -24,42 +23,33 @@
 		cursor: pointer;
 	}
 }
-
 .sidebar_menu {
 	width: 320px;
 	height: 100vh;
 	background-color: $base;
 	justify-content: center;
 	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-
+	position: sticky;
 	.navbar_wrapper {
 		display: flex;
 		width: 100%;
-		padding-top: 28px;
-		gap: 12px;
-		padding-left: 2rem;
-		justify-content: center;
-		align-items: center;
 	}
 	.icon_wrapper {
-		// height: 8px;
-		//display: flex;
-		//justify-content: center;
+		display: flex;
+		justify-content: center;
 	}
 	.menu_wrapper {
 		display: flex;
-		width: 100%;
-		padding-right: 1.3rem;
+		justify-content: center;
 		align-items: center;
-		justify-content: space-between;
 	}
 	.menu_links {
-		// display: flex;
+		display: flex;
+		// align-items: center;
 		font-family: $font1;
 		text-decoration: none;
+		//justify-content: left;
+		padding-left: 2em;
 		&:hover {
 			//background-color: white;
 			//width: 100%;
@@ -70,9 +60,9 @@
 		}
 		.menu_title {
 			color: $white;
-			font-size: 16px;
-			font-weight: 600;
+			font-size: $font-lg;
 			margin-left: 16px;
+			padding: 18px 0 0 18px;
 		}
 	}
 }
