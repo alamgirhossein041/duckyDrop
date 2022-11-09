@@ -9,7 +9,10 @@ export default function SimpleAirdrop() {
           <div className={styles.step}>
             <p>1</p>
           </div>
-          <div className={styles.label}></div>
+          <div className={styles.label}>
+            <h1>Airdrop Details</h1>
+            <p>Fill Airdrop Data</p>
+          </div>
         </div>
         <div className={styles.connector}></div>
         <div className={styles.step_bg}>
