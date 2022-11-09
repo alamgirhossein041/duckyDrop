@@ -10,6 +10,7 @@ import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
+
 	const { address } = useWeb3();
 	console.log({ address });
 	// const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
@@ -35,56 +36,55 @@ export default function Sidebar() {
 	// 		});
 	// }
 
-	// if (ethereumAccount === null) {
-	// 	return (
-	// 		<>
-	// 			{isMetamaskInstalled ? (
-	// 				<>{toast.info(`Please Connect Your Metamask`)}</>
-	// 			) : (
-	// 				<>{toast.warning(`Please Install Your Metamask`)}</>
-	// 			)}
-	// 		</>
-	// 	);
-	// }
 
-	return (
-		<div>
-			{" "}
-			<div className={styles.sidebar_menu}>
-				<div className={styles.navbar}>
-					<Image
-						src="/image/Logo.svg"
-						width={200}
-						height={50}
-						alt="DuckyDrop Logo"
-					/>
-					<ConnectWalletButton />
-					{/* <button className={styles.connect_button} onClick={connectWallet}></button> */}
-					{/* <p style={{ color: "white", fontSize: "14px" }}>{address}</p> */}
+  // if (ethereumAccount === null) {
+  // 	return (
+  // 		<>
+  // 			{isMetamaskInstalled ? (
+  // 				<>{toast.info(`Please Connect Your Metamask`)}</>
+  // 			) : (
+  // 				<>{toast.warning(`Please Install Your Metamask`)}</>
+  // 			)}
+  // 		</>
+  // 	);
+  // }
 
-					{SidebarData.map((item, index) => {
-						return (
-							<div className={styles.navbar_wrapper} key={index}>
-								<div className={styles.icon_wrapper}>
-									<Image src="/image/star.svg" width={20} height={20} alt="star" />
-								</div>
-								<div className={styles.menu_wrapper}>
-									<Link className={styles.menu_links} href={item.path}>
-										<p className={styles.menu_title}>{item.title}</p>
-									</Link>
-									<Image
-										className={styles.lock_icon}
-										src="/image/lock-circle.svg"
-										width={20}
-										height={20}
-										alt="lock"
-									/>
-								</div>
-							</div>
-						);
-					})}
-				</div>
-			</div>
-		</div>
-	);
+
+  const shortenAddress = (account: any) =>
+    `${account?.slice(0, 5)}...${account?.slice(account?.length - 4)}`;
+  console.log(shortenAddress);
+
+  return (
+    <>
+      <div className={styles.sidebar}>
+        <Image
+          src="/svg/logo.svg"
+          width={200}
+          height={50}
+          alt="Ducky Drop Logo"
+        />
+        <button className={styles.connect_button} onClick={connectWallet}>
+          {account ? shortenAddress(account) : "Connect Wallet"}
+        </button>
+        <div className={styles.menu_wrapper}>
+          {SidebarData.map((item, index) => {
+            return (
+              <div className={styles.menu} key={index}>
+                <Image
+                  src="/image/star.svg"
+                  width={28}
+                  height={28}
+                  alt="Menu"
+                />
+                <Link href={item.path}>
+                  <p>{item.title}</p>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+
 }
