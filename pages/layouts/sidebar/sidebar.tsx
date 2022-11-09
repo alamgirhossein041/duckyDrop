@@ -1,52 +1,39 @@
-import { useEffect, useState } from "react";
-import { ethers } from "ethers";
+import { useEffect, useState, useContext } from "react";
 import { SidebarData } from "./sidebar-data";
-import { MetaMaskInpageProvider } from "@metamask/providers";
+import { useWeb3 } from "../../hooks/web3-client";
 import { toast } from "react-toastify";
+import { ConnectWalletButton } from "../../components/connect-button";
+// import { MetamaskContextProvider } from "../../components/use-context.tsx/metamask-context";
+// import { MetamaskContext } from "../../components/use-context.tsx/metamask-context";
 import Link from "next/link";
 import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
-	const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
-	const [account, setAccount] = useState<string | null>(null);
-	const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
+	const { address } = useWeb3();
+	console.log({ address });
+	// const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
+	// const [account, setAccount] = useState<string | null>(null);
+	// const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
 
-	useEffect(() => {
-		if ((window as any).ethereum) {
-			setIsMetamaskInstalled(true);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if ((window as any).ethereum) {
+	// 		setIsMetamaskInstalled(true);
+	// 	}
+	// }, []);
 
-	async function connectWallet(): Promise<void> {
-		(window as any).ethereum
-			.request({
-				method: "eth_requestAccounts",
-			})
-			.then((accounts: string[]) => {
-				setAccount(accounts[0]);
-			})
-			.catch((error: any) => {
-				alert(`Something went wrong`);
-			});
-	}
-
-	const [stateImage, setStateImage] = useState(false);
-	const imageState = (state: any) => {
-		if (state === !state) {
-			return "available";
-		} else {
-			return "locked";
-		}
-	};
-
-	const available = imageState(status);
-	let imageURL = "";
-
-	if (available === "available") imageURL = "lock.svg";
-	else imageURL = "star.svg";
-
-	console.log(available);
+	// async function connectWallet(): Promise<void> {
+	// 	(window as any).ethereum
+	// 		.request({
+	// 			method: "eth_requestAccounts",
+	// 		})
+	// 		.then((accounts: string[]) => {
+	// 			setAccount(accounts[0]);
+	// 		})
+	// 		.catch((error: any) => {
+	// 			alert(`Something went wrong`);
+	// 		});
+	// }
 
 	// if (ethereumAccount === null) {
 	// 	return (
@@ -61,7 +48,7 @@ export default function Sidebar() {
 	// }
 
 	return (
-		<>
+		<div>
 			{" "}
 			<div className={styles.sidebar_menu}>
 				<div className={styles.navbar}>
@@ -71,10 +58,10 @@ export default function Sidebar() {
 						height={50}
 						alt="DuckyDrop Logo"
 					/>
-					<button className={styles.connect_button} onClick={connectWallet}>
-						Connect Wallet
-					</button>
-					<p>{account}</p>
+					<ConnectWalletButton />
+					{/* <button className={styles.connect_button} onClick={connectWallet}></button> */}
+					{/* <p style={{ color: "white", fontSize: "14px" }}>{address}</p> */}
+
 					{SidebarData.map((item, index) => {
 						return (
 							<div className={styles.navbar_wrapper} key={index}>
@@ -98,6 +85,6 @@ export default function Sidebar() {
 					})}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
