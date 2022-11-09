@@ -55,9 +55,9 @@ export default function Sidebar() {
 		<>
 			<div className={styles.sidebar}>
 				<Image src="/svg/logo.svg" width={200} height={50} alt="Ducky Drop Logo" />
-				{/* <button className={styles.connect_button} onClick={connectWallet}>
-          {account ? shortenAddress(account) : "Connect Wallet"}
-        </button> */}
+				<button className={styles.connect_button} onClick={connectWallet}>
+					{account ? shortenAddress(account) : "Connect Wallet"}
+				</button>
 				<div className={styles.menu_wrapper}>
 					{SidebarData.map((item, index) => {
 						return (
