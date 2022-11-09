@@ -2,36 +2,36 @@
 @import "font.module";
 
 .sidebar {
-  width: 320px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  background-color: $base;
-  padding: 24px;
-  .connect_button {
-    width: 100%;
-    font-size: 18px;
-    font-weight: 700;
-    background: $gradient-main;
-    border: none;
-    border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-  }
-  .menu_wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      p {
-        font-size: 18px;
-        font-weight: 600;
-        color: $white;
-      }
-    }
-  }
+	width: 320px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	background-color: $base;
+	padding: 24px;
+	.connect_button {
+		width: 100%;
+		font-size: 18px;
+		font-weight: 700;
+		background: $gradient-main;
+		border: none;
+		border-radius: 8px;
+		padding: 16px;
+		cursor: pointer;
+	}
+	.menu_wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		.menu {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			p {
+				font-size: 18px;
+				font-weight: 600;
+				color: $white;
+			}
+		}
+	}
 }
