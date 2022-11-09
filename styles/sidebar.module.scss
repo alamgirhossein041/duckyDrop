@@ -1,68 +1,37 @@
 @import "color.module";
 @import "font.module";
 
-.navbar {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 20px;
-  padding-top: 32px;
-  gap: 12px;
-  .connect_button {
-    font-family: $font1;
-    font-size: $font-lg;
-    font-weight: 600;
-    width: 220px;
-    border: none;
-    border-radius: 42px;
-    background: $gradient-main;
-    padding: 12px;
-    margin-top: 12px;
-    cursor: pointer;
-  }
-}
-.sidebar_menu {
+.sidebar {
   width: 320px;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   background-color: $base;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  .navbar_wrapper {
-    display: flex;
+  padding: 24px;
+  .connect_button {
     width: 100%;
-  }
-  .icon_wrapper {
-    display: flex;
-    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    background: $gradient-main;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
   }
   .menu_wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .menu_links {
-    display: flex;
-    // align-items: center;
-    font-family: $font1;
-    text-decoration: none;
-    //justify-content: left;
-    padding-left: 2em;
-    &:hover {
-      //background-color: white;
-      //width: 100%;
-      //height: 45px;
-      //text-align: center;
-      //border-radius: 5px;
-      //margin: 0 2rem;
-    }
-    .menu_title {
-      color: $white;
-      font-size: $font-lg;
-      margin-left: 16px;
-      padding: 18px 0 0 18px;
+    flex-direction: column;
+    gap: 40px;
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      p {
+        font-size: 18px;
+        font-weight: 600;
+        color: $white;
+      }
     }
   }
 }
