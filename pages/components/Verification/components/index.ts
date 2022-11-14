@@ -1,1 +1,1 @@
-export { default as Verification } from "./verification";
+export { default as verification } from "./verification";
