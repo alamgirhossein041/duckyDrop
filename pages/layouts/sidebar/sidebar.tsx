@@ -1,36 +1,41 @@
-import { useEffect, useState } from "react";
-import { ethers } from "ethers";
+import { useEffect, useState, useContext } from "react";
 import { SidebarData } from "./sidebar-data";
-import { MetaMaskInpageProvider } from "@metamask/providers";
+import { useWeb3 } from "../../hooks/web3-client";
 import { toast } from "react-toastify";
+import { ConnectWalletButton } from "../../components/connect-button";
+// import { MetamaskContextProvider } from "../../components/use-context.tsx/metamask-context";
+// import { MetamaskContext } from "../../components/use-context.tsx/metamask-context";
 import Link from "next/link";
 import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
-  const [isMetamaskInstalled, setIsMetamaskInstalled] =
-    useState<boolean>(false);
-  const [account, setAccount] = useState<string | null>(null);
-  const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
 
-  useEffect(() => {
-    if ((window as any).ethereum) {
-      setIsMetamaskInstalled(true);
-    }
-  }, []);
+	const { address } = useWeb3();
+	console.log({ address });
+	// const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
+	// const [account, setAccount] = useState<string | null>(null);
+	// const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
 
-  async function connectWallet(): Promise<void> {
-    (window as any).ethereum
-      .request({
-        method: "eth_requestAccounts",
-      })
-      .then((accounts: string[]) => {
-        setAccount(accounts[0]);
-      })
-      .catch((error: any) => {
-        alert(`Something went wrong`);
-      });
-  }
+	// useEffect(() => {
+	// 	if ((window as any).ethereum) {
+	// 		setIsMetamaskInstalled(true);
+	// 	}
+	// }, []);
+
+	// async function connectWallet(): Promise<void> {
+	// 	(window as any).ethereum
+	// 		.request({
+	// 			method: "eth_requestAccounts",
+	// 		})
+	// 		.then((accounts: string[]) => {
+	// 			setAccount(accounts[0]);
+	// 		})
+	// 		.catch((error: any) => {
+	// 			alert(`Something went wrong`);
+	// 		});
+	// }
+
 
   // if (ethereumAccount === null) {
   // 	return (
@@ -43,6 +48,7 @@ export default function Sidebar() {
   // 		</>
   // 	);
   // }
+
 
   const shortenAddress = (account: any) =>
     `${account?.slice(0, 5)}...${account?.slice(account?.length - 4)}`;
@@ -79,4 +85,5 @@ export default function Sidebar() {
       </div>
     </>
   );
+
 }
