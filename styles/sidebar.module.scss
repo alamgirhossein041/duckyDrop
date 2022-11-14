@@ -2,7 +2,10 @@
 @import "font.module";
 
 .sidebar {
-	position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
 	width: 320px;
 	height: 100vh;
 	display: flex;

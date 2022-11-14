@@ -17,6 +17,7 @@ export default function Layout({ children }: Props) {
 				/>
 				<link rel="icon" href="/svg/favicon.svg" />
 			</Head>
+
 			<Sidebar />
 			{children}
 		</div>
