@@ -1,32 +1,21 @@
 import styles from "/styles/SimpleAirdrop.module.scss";
+import { useState } from "react";
+import FormContainer from "./FormContainer";
+import AirdropDetails from "./SimpleAirdrop/AirdropDetails";
 
 export default function SimpleAirdrop() {
+  const [formStep, setFormStep] = useState(0);
+  const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
+  const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
+
   return (
     <div className={styles.container}>
-      <h1>Simple Airdrop here!</h1>
-      <div className={styles.step_wrapper}>
-        <div className={styles.step_bg}>
-          <div className={styles.step}>
-            <p>1</p>
-          </div>
-          <div className={styles.label}>
-            <h1>Airdrop Details</h1>
-            <p>Fill Airdrop Data</p>
-          </div>
-        </div>
-        <div className={styles.connector}></div>
-        <div className={styles.step_bg}>
-          <div className={styles.step}>
-            <p>2</p>
-          </div>
-        </div>
-        <div className={styles.connector}></div>
-        <div className={styles.step_bg}>
-          <div className={styles.step}>
-            <p>3</p>
-          </div>
-        </div>
-      </div>
+      <FormContainer currentStep={formStep} prevFormStep={prevFormStep}>
+        {formStep == 0 && (
+          <AirdropDetails formStep={formStep} nextFormStep={nextFormStep} />
+        )}
+        {formStep == 1 && <h1>Halo Halo</h1>}
+      </FormContainer>
     </div>
   );
 }

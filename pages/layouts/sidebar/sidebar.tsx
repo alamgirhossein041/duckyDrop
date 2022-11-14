@@ -46,7 +46,6 @@ export default function Sidebar() {
 
   const shortenAddress = (account: any) =>
     `${account?.slice(0, 5)}...${account?.slice(account?.length - 4)}`;
-  console.log(shortenAddress);
 
   return (
     <>
