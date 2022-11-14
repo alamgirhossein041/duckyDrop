@@ -1,22 +1,22 @@
-import styles from "/styles/SimpleAirdrop.module.scss";
-import { useState, useRef } from "react";
+import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
+import { useState } from "react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "@codemirror/view";
-import { Button } from "../Button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import Button from "../Button.js";
+import { useForm } from "react-hook-form";
 import Popup from "../Popup";
+import StepWrapper from "../StepWrapper";
 
 interface AirdropDetailsType {
   formStep: any;
   nextFormStep: any;
 }
 
-type Inputs = {
-  token: number;
-};
-
-export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
+export default function AirdropDetails({
+  nextFormStep,
+  formStep,
+}: AirdropDetailsType) {
   const {
     register,
     handleSubmit,
@@ -24,68 +24,31 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      example: "",
+      token_address: "",
     },
   });
-
-  console.log(watch("example"));
 
   const baseTheme = EditorView.baseTheme({
     "&": {
       border: "1px solid rgba(0, 0, 0, 0.2)",
       borderRadius: "6px",
-      outline: "none !important",
+      outline: "unset !important",
     },
     ".cm-gutters": {
       borderRadius: "6px 0 0 6px",
     },
   });
   const [popupActive, setPopupActive] = useState(false);
-
-  // async function handleSubmit(e: any) {
-  //   e.preventDefault();
-  //   nextFormStep();
-  //   console.log("submitting");
-  // }
+  console.log(watch("token_address"));
 
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        console.log(data);
         nextFormStep();
+        console.log(data);
       })}
     >
-      <div className={styles.step_wrapper}>
-        <div className={`${styles.step_bg} ${styles.active}`}>
-          <div className={styles.step}>
-            <p>1</p>
-          </div>
-          <div className={styles.label}>
-            <h1>Airdrop Details</h1>
-            <p>Fill Airdrop Data</p>
-          </div>
-        </div>
-        <div className={`${styles.connector} ${styles.active}`}></div>
-        <div className={styles.step_bg}>
-          <div className={styles.step}>
-            <p>2</p>
-          </div>
-          <div className={styles.label}>
-            <h1>Transaction Approval</h1>
-            <p>Approve Your Airdrop</p>
-          </div>
-        </div>
-        <div className={styles.connector}></div>
-        <div className={styles.step_bg}>
-          <div className={styles.step}>
-            <p>3</p>
-          </div>
-          <div className={styles.label}>
-            <h1>Ducky Drop</h1>
-            <p>Send Your Token</p>
-          </div>
-        </div>
-      </div>
+      <StepWrapper formStep={formStep} />
       <div className={styles.network_wrapper}>
         <div className={`${styles.network} ${styles.active}`}>
           <Image
@@ -110,10 +73,16 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
             <Image
               src="/svg/network-polygon-disable.svg"
               fill={true}
+              sizes="100%"
               alt="Logo Harmony"
             />
             <div className={styles.padlock}>
-              <Image src={"/svg/padlock.svg"} fill={true} alt="lock" />
+              <Image
+                src={"/svg/padlock.svg"}
+                fill={true}
+                sizes="100%"
+                alt="lock"
+              />
             </div>
           </div>
           <p>Polygon Matic</p>
@@ -123,10 +92,16 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
             <Image
               src="/svg/network-harmony-disable.svg"
               fill={true}
+              sizes="100%"
               alt="Logo Harmony"
             />
             <div className={styles.padlock}>
-              <Image src={"/svg/padlock.svg"} fill={true} alt="lock" />
+              <Image
+                src={"/svg/padlock.svg"}
+                fill={true}
+                sizes="100%"
+                alt="lock"
+              />
             </div>
           </div>
 
@@ -137,10 +112,16 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
             <Image
               src="/svg/network-avalanche-disable.svg"
               fill={true}
+              sizes="100%"
               alt="Logo Harmony"
             />
             <div className={styles.padlock}>
-              <Image src={"/svg/padlock.svg"} fill={true} alt="lock" />
+              <Image
+                src={"/svg/padlock.svg"}
+                fill={true}
+                sizes="100%"
+                alt="lock"
+              />
             </div>
           </div>
           <p>Avalanche</p>
@@ -150,10 +131,16 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
             <Image
               src="/svg/network-fantom-disable.svg"
               fill={true}
+              sizes="100%"
               alt="Logo Harmony"
             />
             <div className={styles.padlock}>
-              <Image src={"/svg/padlock.svg"} fill={true} alt="lock" />
+              <Image
+                src={"/svg/padlock.svg"}
+                fill={true}
+                sizes="100%"
+                alt="lock"
+              />
             </div>
           </div>
           <p>Fantom</p>
@@ -164,12 +151,12 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
         <div className={styles.form_wrapper}>
           <div className={styles.input_token_address}>
             <input
-              {...register("example", { required: true })}
+              {...register("token_address", { required: true })}
               type="text"
               placeholder="Input Your Token Address   "
             />
-            {errors.example && (
-              <p className={styles.error_message}>Token address is required</p>
+            {errors.token_address && (
+              <p className="error_message">Token address is required</p>
             )}
           </div>
           <div className={styles.token_preview}>
@@ -230,7 +217,7 @@ export default function AirdropDetails({ nextFormStep }: AirdropDetailsType) {
               disabled
             ></textarea>
             <p>Address, Amount</p>
-            <Button onClick={() => setPopupActive(false)}>
+            <Button color="primary" onClick={() => setPopupActive(false)}>
               Okay, understand
             </Button>
           </div>
