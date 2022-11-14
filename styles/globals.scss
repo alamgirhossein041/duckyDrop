@@ -26,3 +26,11 @@ button {
     transform: scale(1.04);
   }
 }
+input {
+  font-family: "Poppins";
+  outline: none;
+  padding: 16px;
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+}
