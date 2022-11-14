@@ -2,6 +2,7 @@ import styles from "/styles/SimpleAirdrop.module.scss";
 import { useState } from "react";
 import FormContainer from "./FormContainer";
 import AirdropDetails from "./SimpleAirdrop/AirdropDetails";
+import TransactionApproval from "./SimpleAirdrop/TransactionApproval";
 
 export default function SimpleAirdrop() {
   const [formStep, setFormStep] = useState(0);
@@ -10,11 +11,17 @@ export default function SimpleAirdrop() {
 
   return (
     <div className={styles.container}>
-      <FormContainer currentStep={formStep} prevFormStep={prevFormStep}>
+      <FormContainer currentStep={formStep}>
         {formStep == 0 && (
           <AirdropDetails formStep={formStep} nextFormStep={nextFormStep} />
         )}
-        {formStep == 1 && <h1>Halo Halo</h1>}
+        {formStep == 1 && (
+          <TransactionApproval
+            formStep={formStep}
+            nextFormStep={nextFormStep}
+            prevFormStep={prevFormStep}
+          />
+        )}
       </FormContainer>
     </div>
   );
