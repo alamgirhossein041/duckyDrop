@@ -10,32 +10,31 @@ import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
+  const { address } = useWeb3();
+  console.log({ address });
+  const [isMetamaskInstalled, setIsMetamaskInstalled] =
+    useState<boolean>(false);
+  const [account, setAccount] = useState<string | null>(null);
+  const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
 
-	const { address } = useWeb3();
-	console.log({ address });
-	// const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
-	// const [account, setAccount] = useState<string | null>(null);
-	// const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
+  // useEffect(() => {
+  // 	if ((window as any).ethereum) {
+  // 		setIsMetamaskInstalled(true);
+  // 	}
+  // }, []);
 
-	// useEffect(() => {
-	// 	if ((window as any).ethereum) {
-	// 		setIsMetamaskInstalled(true);
-	// 	}
-	// }, []);
-
-	// async function connectWallet(): Promise<void> {
-	// 	(window as any).ethereum
-	// 		.request({
-	// 			method: "eth_requestAccounts",
-	// 		})
-	// 		.then((accounts: string[]) => {
-	// 			setAccount(accounts[0]);
-	// 		})
-	// 		.catch((error: any) => {
-	// 			alert(`Something went wrong`);
-	// 		});
-	// }
-
+  async function connectWallet(): Promise<void> {
+    (window as any).ethereum
+      .request({
+        method: "eth_requestAccounts",
+      })
+      .then((accounts: string[]) => {
+        setAccount(accounts[0]);
+      })
+      .catch((error: any) => {
+        alert(`Something went wrong`);
+      });
+  }
 
   // if (ethereumAccount === null) {
   // 	return (
@@ -48,7 +47,6 @@ export default function Sidebar() {
   // 		</>
   // 	);
   // }
-
 
   const shortenAddress = (account: any) =>
     `${account?.slice(0, 5)}...${account?.slice(account?.length - 4)}`;
@@ -85,5 +83,4 @@ export default function Sidebar() {
       </div>
     </>
   );
-
 }
