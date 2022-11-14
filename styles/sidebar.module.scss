@@ -2,6 +2,7 @@
 @import "font.module";
 
 .sidebar {
+	position: absolute;
 	width: 320px;
 	height: 100vh;
 	display: flex;
@@ -25,12 +26,30 @@
 		gap: 40px;
 		.menu {
 			display: flex;
-			align-items: center;
 			gap: 16px;
+			color: white;
+			font-size: 18px;
+			font-weight: 600;
 			p {
+				width: 100%;
 				font-size: 18px;
 				font-weight: 600;
 				color: $white;
+			}
+		}
+		.submenu_wrapper {
+			display: flex;
+			flex-direction: column;
+			margin-top: 8px;
+			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+			padding-left: 42px;
+			gap: 20px;
+			.link {
+				font-size: 18px;
+			}
+			.link_wrapper {
+				color: rgba(255, 255, 255, 0.6);
+				font-size: 18px;
 			}
 		}
 	}

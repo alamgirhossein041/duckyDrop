@@ -1,65 +1,66 @@
 .container {
-  padding: 60px;
+	padding: 60px;
 }
 .step_wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .step_bg {
-    width: 48px;
-    height: 48px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(
-      100% 100% at 50% 0%,
-      rgba(255, 251, 157, 0.3) 14.47%,
-      rgba(255, 217, 18, 0.3) 50.07%,
-      rgba(235, 169, 0, 0.3) 100%
-    );
-    border-radius: 50%;
-    .step {
-      width: 34px;
-      height: 34px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(
-        100% 100% at 50% 0%,
-        #fffb9d 14.47%,
-        #ffd912 50.07%,
-        #eba900 100%
-      );
-      border-radius: 50%;
-      p {
-        font-size: 18px;
-        font-weight: 700;
-        color: #fff;
-      }
-    }
-    .label {
-      min-width: 200px;
-      position: absolute;
-      bottom: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      h1 {
-        font-size: 20px;
-      }
-    }
-  }
-  .connector {
-    width: 200px;
-    height: 6px;
-    background: radial-gradient(
-      100% 100% at 50% 0%,
-      #fffb9d 14.47%,
-      #ffd912 50.07%,
-      #eba900 100%
-    );
-  }
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	.step_bg {
+		width: 48px;
+		height: 48px;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: radial-gradient(
+			100% 100% at 50% 0%,
+			rgba(255, 251, 157, 0.3) 14.47%,
+			rgba(255, 217, 18, 0.3) 50.07%,
+			rgba(235, 169, 0, 0.3) 100%
+		);
+		border-radius: 50%;
+		.step {
+			width: 34px;
+			height: 34px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: radial-gradient(
+				100% 100% at 50% 0%,
+				#fffb9d 14.47%,
+				#ffd912 50.07%,
+				#eba900 100%
+			);
+			border-radius: 50%;
+			p {
+				font-size: 18px;
+				font-weight: 700;
+				color: #fff;
+			}
+		}
+		.label {
+			min-width: 200px;
+			position: absolute;
+			bottom: -100px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			h1 {
+				font-size: 20px;
+			}
+		}
+	}
+	.connector {
+		width: 200px;
+		height: 6px;
+		background: radial-gradient(
+			100% 100% at 50% 0%,
+			#fffb9d 14.47%,
+			#ffd912 50.07%,
+			#eba900 100%
+		);
+	}
 }

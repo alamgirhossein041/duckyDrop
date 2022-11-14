@@ -6,23 +6,23 @@ h5,
 h6,
 p,
 a {
-  font-family: "Poppins";
+	font-family: "Poppins";
 }
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 button {
-  font-family: "Poppins";
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: 0.2s;
-  &:hover {
-    transform: scale(1.04);
-  }
+	font-family: "Poppins";
+	border: none;
+	outline: none;
+	cursor: pointer;
+	transition: 0.2s;
+	&:hover {
+		transform: scale(1.04);
+	}
 }
