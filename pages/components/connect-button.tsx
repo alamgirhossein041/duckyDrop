@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
-import { useWeb3 } from "../hooks/web3-client";
+//import { useWeb3 } from "../hooks/web3-client";
 import styles from "/styles/sidebar.module.scss";
+import { useWeb3Context } from "../context";
 
 interface ConnectProps {
 	connect: (() => Promise<void>) | null;
@@ -22,10 +23,13 @@ interface DisconnectProps {
 }
 
 const DisconnectButton = ({ disconnect }: DisconnectProps) => {
-	const { address, network } = useWeb3();
+	//const { address, network } = useWeb3();
+	const shortenAddress = (address: any) =>
+		`${address?.slice(0, 7)}...${address?.slice(address?.length - 4)}`;
+
 	return disconnect ? (
 		<button className={styles.connect_button} onClick={disconnect}>
-			{address}
+			{/* {shortenAddress(address)} */}
 		</button>
 	) : (
 		<button>Loading...</button>
@@ -33,7 +37,7 @@ const DisconnectButton = ({ disconnect }: DisconnectProps) => {
 };
 
 export function ConnectWalletButton() {
-	const { web3Provider, connect, disconnect } = useWeb3();
+	const { web3Provider, connect, disconnect } = useWeb3Context();
 
 	return web3Provider ? (
 		<DisconnectButton disconnect={disconnect} />

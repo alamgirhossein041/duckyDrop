@@ -1,5 +1,4 @@
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import { useCallback, useEffect, useReducer } from "react";
 import { ethers } from "ethers";
 import {
 	Web3ProviderState,
@@ -7,10 +6,10 @@ import {
 	web3InitialState,
 	web3Reducer,
 } from "../reducers";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { toast } from "react-toastify";
-import { useCallback, useEffect, useReducer } from "react";
-import { Web3Provider } from "@ethersproject/providers";
 
 const providerOptions = {
 	walletconnect: {
@@ -30,11 +29,11 @@ if (typeof window !== "undefined") {
 	});
 }
 
-type Web3Client = Web3ProviderState & {
-	connect: () => Promise<void>;
-	disconnect: () => Promise<void>;
-	network: () => Promise<void>;
-};
+// type Web3Client = Web3ProviderState & {
+// 	connect: () => Promise<void>;
+// 	disconnect: () => Promise<void>;
+// 	network: () => Promise<void>;
+// };
 
 export const useWeb3 = () => {
 	const [state, dispatch] = useReducer(web3Reducer, web3InitialState);
@@ -135,5 +134,5 @@ export const useWeb3 = () => {
 		network,
 		connect,
 		disconnect,
-	} as Web3Client;
+	} as Web3ProviderState;
 };
