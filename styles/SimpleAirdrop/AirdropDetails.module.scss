@@ -1,0 +1,129 @@
+.network_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  .network {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ff45e0;
+    border-radius: 6px;
+    padding: 24px;
+    cursor: pointer;
+    &.active {
+      background: #ff45e0;
+      p {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+    &.disable {
+      border-color: rgba(0, 0, 0, 0.1);
+      cursor: no-drop;
+      p {
+        color: rgba(0, 0, 0, 0.2);
+        opacity: 1;
+      }
+    }
+    p {
+      font-weight: 600;
+      color: #ff45e0;
+      opacity: 0.5;
+    }
+    .icon_network {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      .padlock {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+.token_address_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 64px 0 28px;
+  .form_wrapper {
+    display: flex;
+    gap: 16px;
+    .input_token_address {
+      flex: 1;
+      input {
+        width: 100%;
+        height: 56px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+      }
+    }
+    .token_preview {
+      width: 320px;
+      height: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0a0a0c;
+      border-radius: 6px;
+      padding: 16px;
+      .token_name {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      p {
+        font-weight: 600;
+        color: #fff;
+      }
+    }
+  }
+}
+.list_of_address_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.button_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  .button_left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+.popup_example_address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  textarea {
+    width: 480px;
+    min-height: 200px;
+    font-family: "Poppins";
+    background: rgba(239, 239, 239, 0.3);
+    box-shadow: rgb(17 82 254 / 30%) 0px 0px 1px,
+      rgb(17 82 254 / 15%) 0px 0px 3px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    padding: 14px;
+    margin: 24px 0 8px;
+  }
+  p {
+    width: 100%;
+    font-size: 14px;
+    font-style: italic;
+    color: #54a9f7;
+    margin-bottom: 24px;
+  }
+}
