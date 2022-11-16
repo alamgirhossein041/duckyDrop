@@ -111,7 +111,7 @@ export default function DuckyDrop({ formStep }: DuckyDropProps) {
                 src="/svg/arrow-top.svg"
                 width={20}
                 height={20}
-                className={styles.arrow_top}
+                className={transactionDetailsView ? styles.arrow_top : ""}
                 alt="arrow top"
               />
             </div>
