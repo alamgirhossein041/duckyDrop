@@ -1,0 +1,108 @@
+.select_amount_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  p {
+    font-weight: 500;
+  }
+  .select_amount {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    .choice_amount {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      &.active {
+        .checkbox {
+          background: #f9cb0d;
+          border: 2px solid #f9cb0d;
+        }
+        p {
+          color: #000;
+        }
+      }
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+      }
+      p {
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+  }
+}
+.airdrop_details {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #f7c70b;
+  border-radius: 8px;
+  padding: 28px 16px;
+  margin: 32px 0 64px;
+  .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      font-family: "MonumentExtended-Regular";
+      font-weight: 400;
+      color: #0e0e0e;
+    }
+    p {
+      color: rgba(14, 14, 14, 0.6);
+      span {
+        font-weight: 600;
+        color: rgba(14, 14, 14, 1);
+      }
+    }
+  }
+}
+.list_of_address {
+  margin-bottom: 24px;
+  .title_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 0 48px;
+    p {
+      font-weight: 500;
+    }
+  }
+  .address_box {
+    min-height: 40px;
+    max-height: 240px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 24px 40px 24px 18px;
+    margin-top: 16px;
+    overflow: auto;
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      line-height: 32px;
+      .content_left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .number {
+          width: 14px;
+        }
+      }
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+}
+.button_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
