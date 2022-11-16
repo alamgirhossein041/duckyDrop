@@ -7,6 +7,7 @@ import {
 	web3Reducer,
 } from "../reducers";
 import Web3Modal from "web3modal";
+
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { toast } from "react-toastify";

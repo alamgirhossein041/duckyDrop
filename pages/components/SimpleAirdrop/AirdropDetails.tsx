@@ -1,12 +1,15 @@
+import React, { useEffect, useState } from "react";
+import { EvmChain } from "@moralisweb3/evm-utils";
+import { EditorView } from "@codemirror/view";
+import { useWeb3 } from "../../hooks/web3-client.js";
+import { useForm } from "react-hook-form";
 import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
-import { useState } from "react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
-import { EditorView } from "@codemirror/view";
 import Button from "../Button.js";
-import { useForm } from "react-hook-form";
 import Popup from "../Popup";
 import StepWrapper from "../StepWrapper";
+import Moralis from "moralis";
 
 interface AirdropDetailsType {
 	formStep: any;
@@ -27,6 +30,30 @@ export default function AirdropDetails({
 			token_address: "",
 		},
 	});
+
+	const [isBalance, setIsBalance] = useState("");
+
+	useEffect(() => {
+		async function getBalance() {
+			const address = "0xe520FB82DFB4eEad1fc69d23bbB7469Cc3F6CEa6";
+			const tokenAddresses = ["0x28f22e9bd908055c2e8b48beb133d2dd24ad4d1a"];
+			const chain = EvmChain.BSC_TESTNET;
+			//const setIsBalance = Moralis.EvmApi.token.getWalletTokenBalances;
+
+			await Moralis.start({
+				apiKey: process.env.MORALIS_API_KEY,
+			});
+
+			const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+				address,
+				chain,
+				tokenAddresses,
+			});
+			setIsBalance;
+			console.log("res", response.raw);
+		}
+		getBalance();
+	}, []);
 
 	const baseTheme = EditorView.baseTheme({
 		"&": {
@@ -134,6 +161,7 @@ export default function AirdropDetails({
 							<p className="error_message">Token address is required</p>
 						)}
 					</div>
+					{/* <GetBalance /> */}
 					<div className={styles.token_preview}>
 						<div className={styles.token_name}>
 							<Image
@@ -144,7 +172,7 @@ export default function AirdropDetails({
 							/>
 							<p>STRT</p>
 						</div>
-						<p>10,000,000,000,000</p>
+						<p>{isBalance}</p>
 					</div>
 				</div>
 			</div>
