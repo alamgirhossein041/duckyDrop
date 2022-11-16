@@ -46,7 +46,7 @@ export default function Sidebar() {
   const shortenAddress = (account: string) =>
     `${account.slice(0, 7)}...${account.slice(account.length - 4)}`;
 
-  const [subToggle, SetSubToggle] = useState(false);
+  const [subToggle, setSubToggle] = useState(true);
 
   return (
     <>
@@ -79,7 +79,7 @@ export default function Sidebar() {
           </Link>
           <Link className={styles.airdrop_menu} href="/">
             <div
-              onClick={() => SetSubToggle(!subToggle)}
+              onClick={() => setSubToggle(!subToggle)}
               className={styles.menu}
             >
               <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
@@ -91,30 +91,28 @@ export default function Sidebar() {
                 alt="Menu"
               />
             </div>
-            {subToggle && (
-              <div className={styles.submenu_wrapper}>
-                <Link href="/simple-airdrop" className={styles.link_wrapper}>
-                  Simple Airdrop
-                </Link>
-                <Link href="/reusable-airdrop" className={styles.link_wrapper}>
-                  Reusable Airdrop
-                </Link>
-                <Link href="/nft-airdrop" className={styles.link_wrapper}>
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    NFT Airdrop
-                    <Image
-                      src="/image/lock-circle.svg"
-                      width={28}
-                      height={28}
-                      alt="Vip"
-                    />
-                  </div>
-                </Link>
-              </div>
-            )}
           </Link>
+          {subToggle && (
+            <div className={styles.submenu_wrapper}>
+              <Link href="/" className={styles.link_wrapper}>
+                Simple Airdrop
+              </Link>
+              <Link href="/reusable-airdrop" className={styles.link_wrapper}>
+                Reusable Airdrop
+              </Link>
+              <Link href="/nft-airdrop" className={styles.link_wrapper}>
+                <div className={styles.item}>
+                  NFT Airdrop
+                  <Image
+                    src="/image/lock-circle.svg"
+                    width={28}
+                    height={28}
+                    alt="Vip"
+                  />
+                </div>
+              </Link>
+            </div>
+          )}
           <Link href="/approval-menu" className={styles.link_wrapper}>
             <div className={styles.menu}>
               <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
