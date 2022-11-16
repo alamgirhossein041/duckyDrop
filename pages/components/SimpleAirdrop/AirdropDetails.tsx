@@ -191,8 +191,14 @@ export default function AirdropDetails({
       </div>
       <div className={styles.button_wrapper}>
         <div className={styles.button_left}>
-          <Button color="primary">Upload CSV File</Button>
-          <Button color="light" onClick={() => setPopupActive(true)}>
+          <Button type="button" color="primary">
+            Upload CSV File
+          </Button>
+          <Button
+            type="button"
+            color="light"
+            onClick={() => setPopupActive(true)}
+          >
             Show Example
           </Button>
         </div>
