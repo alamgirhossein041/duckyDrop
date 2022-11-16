@@ -63,20 +63,22 @@ export default function Sidebar() {
         </button>
         {/* <ConnectWalletButton /> */}
         <div className={styles.menu_wrapper}>
-          <Link href="/vip-drop">
-            <div className={styles.menu}>
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>VIP Drop</p>
-              <div className={styles.icon_status}>
-                <Image
-                  src="/image/lock-circle.svg"
-                  width={28}
-                  height={28}
-                  alt="Vip"
-                />
-              </div>
+          <div
+            className={styles.menu}
+            onClick={() => toast.info("Coming Soon")}
+          >
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>VIP Drop</p>
+            <div className={styles.icon_status}>
+              <Image
+                src="/image/lock-circle.svg"
+                width={28}
+                height={28}
+                alt="Vip"
+              />
             </div>
-          </Link>
+          </div>
+
           <Link className={styles.airdrop_menu} href="/">
             <div
               onClick={() => setSubToggle(!subToggle)}
@@ -142,6 +144,7 @@ export default function Sidebar() {
           </Link>
         </div>
       </div>
+      <ToastContainer className="toast" autoClose={2000} />
     </>
   );
 }

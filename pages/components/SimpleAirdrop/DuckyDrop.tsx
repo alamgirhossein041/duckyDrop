@@ -142,7 +142,7 @@ export default function DuckyDrop({ formStep }: DuckyDropProps) {
           </div>
         </>
       )}
-      <ToastContainer className="toast" />
+      <ToastContainer className="toast" autoClose={2000} />
     </form>
   );
 }

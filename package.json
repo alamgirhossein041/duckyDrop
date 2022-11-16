@@ -14,6 +14,7 @@
     "@walletconnect/web3-provider": "^1.8.0",
     "codemirror": "^6.0.1",
     "ethers": "^5.7.2",
+    "moralis": "^2.7.3",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
