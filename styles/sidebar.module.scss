@@ -48,16 +48,20 @@
     .submenu_wrapper {
       display: flex;
       flex-direction: column;
-      margin-top: 8px;
-      transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-      padding-left: 42px;
-      gap: 20px;
+      gap: 28px;
+      margin-top: -12px;
+      margin-left: 40px;
       .link {
         font-size: 18px;
       }
       .link_wrapper {
         color: rgba(255, 255, 255, 0.6);
         font-size: 18px;
+        .item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }

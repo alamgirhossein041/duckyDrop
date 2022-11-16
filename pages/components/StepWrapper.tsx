@@ -4,10 +4,10 @@ interface StepWrapperProps {
   formStep?: number;
 }
 
-export default function StepWrapper({ formStep = 0 }: StepWrapperProps) {
+export default function StepWrapper({ formStep = 1 }: StepWrapperProps) {
   return (
     <div className={styles.step_wrapper}>
-      <div className={`${styles.step_bg} ${formStep >= 0 && styles.active}`}>
+      <div className={`${styles.step_bg} ${formStep >= 1 && styles.active}`}>
         <div className={styles.step}>
           <p>1</p>
         </div>
@@ -17,9 +17,9 @@ export default function StepWrapper({ formStep = 0 }: StepWrapperProps) {
         </div>
       </div>
       <div
-        className={`${styles.connector} ${formStep >= 0 && styles.active}`}
+        className={`${styles.connector} ${formStep >= 1 && styles.active}`}
       ></div>
-      <div className={`${styles.step_bg} ${formStep >= 1 && styles.active}`}>
+      <div className={`${styles.step_bg} ${formStep >= 2 && styles.active}`}>
         <div className={styles.step}>
           <p>2</p>
         </div>
@@ -29,9 +29,9 @@ export default function StepWrapper({ formStep = 0 }: StepWrapperProps) {
         </div>
       </div>
       <div
-        className={`${styles.connector} ${formStep >= 1 && styles.active}`}
+        className={`${styles.connector} ${formStep >= 2 && styles.active}`}
       ></div>
-      <div className={styles.step_bg}>
+      <div className={`${styles.step_bg} ${formStep >= 3 && styles.active}`}>
         <div className={styles.step}>
           <p>3</p>
         </div>
