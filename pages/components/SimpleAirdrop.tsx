@@ -9,6 +9,7 @@ export default function SimpleAirdrop() {
   const [formStep, setFormStep] = useState(1);
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
+  const backToHome = () => setFormStep(1);
 
   return (
     <div className={styles.container}>
@@ -23,7 +24,9 @@ export default function SimpleAirdrop() {
             prevFormStep={prevFormStep}
           />
         )}
-        {formStep == 3 && <DuckyDrop formStep={formStep} />}
+        {formStep == 3 && (
+          <DuckyDrop formStep={formStep} backToHome={backToHome} />
+        )}
       </FormContainer>
     </div>
   );

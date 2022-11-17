@@ -5,15 +5,18 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface DuckyDropProps {
   formStep: number;
+  backToHome: any;
 }
 
-export default function DuckyDrop({ formStep }: DuckyDropProps) {
+export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
   const { handleSubmit } = useForm();
   const [transactionDetails, setTransactionDetails] = useState(false);
   const [transactionDetailsView, setTransactionDetailsView] = useState(false);
+  const { push } = useRouter();
   return (
     <form
       onSubmit={handleSubmit((data) => {
@@ -139,6 +142,11 @@ export default function DuckyDrop({ formStep }: DuckyDropProps) {
                 </div>
               </div>
             )}
+            <div className={styles.back_to_home}>
+              <Button color="primary" onClick={backToHome}>
+                Back to home
+              </Button>
+            </div>
           </div>
         </>
       )}

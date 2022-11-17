@@ -41,31 +41,51 @@ export default function AirdropDetails({
     },
   });
   const [popupActive, setPopupActive] = useState(false);
-  console.log(watch("token_address"));
+  const [tokenAddress, setTokenAddress] = useState("");
+
+  function handleTokenAddressChange(e: any) {
+    setTokenAddress(e.target.value);
+  }
+
+  // function checkAddress = () => {
+  //   return (
+
+  //   )
+  // }
+
+  console.log(tokenAddress);
+  // console.log(watch("token_address"));
 
   const [tokenInfo, setTokenInfo] = useState<any>();
 
   async function getBalance() {
-    const address = "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB";
-    const chain = EvmChain.BSC_TESTNET;
-    const tokenAddresses = ["0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A"];
+    if (tokenAddress.length != 42) {
+      return;
+    }
+    try {
+      const address = "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB";
+      const chain = EvmChain.BSC_TESTNET;
+      const tokenAddresses = [tokenAddress];
 
-    await Moralis.start({
-      apiKey:
-        "cMQoWJhjxBC395YFojRnnrVHZZBvJgfTqLqFiEZ7WElh2hz0vH324lUjgyueenij",
-    });
+      await Moralis.start({
+        apiKey:
+          "cMQoWJhjxBC395YFojRnnrVHZZBvJgfTqLqFiEZ7WElh2hz0vH324lUjgyueenij",
+      });
 
-    const response = await Moralis.EvmApi.token.getWalletTokenBalances({
-      address,
-      chain,
-      tokenAddresses,
-    });
-    setTokenInfo(response.raw[0]);
-    console.log(tokenInfo);
+      const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+        address,
+        chain,
+        tokenAddresses,
+      });
+      setTokenInfo(response.raw[0]);
+      console.log(tokenInfo);
+    } catch (error) {
+      console.log(error);
+    }
   }
   useEffect(() => {
     getBalance();
-  }, []);
+  }, [tokenAddress]);
 
   return (
     <form
@@ -180,6 +200,8 @@ export default function AirdropDetails({
               {...register("token_address", { required: true })}
               type="text"
               placeholder="Input Your Token Address   "
+              value={tokenAddress}
+              onChange={handleTokenAddressChange}
             />
             {errors.token_address && (
               <p className="error_message">Token address is required</p>
