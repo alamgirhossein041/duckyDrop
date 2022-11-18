@@ -47,12 +47,6 @@ export default function AirdropDetails({
     setTokenAddress(e.target.value);
   }
 
-  // function checkAddress = () => {
-  //   return (
-
-  //   )
-  // }
-
   console.log(tokenAddress);
   // console.log(watch("token_address"));
 
