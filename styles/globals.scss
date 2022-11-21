@@ -30,6 +30,9 @@ button {
   &:hover {
     transform: scale(1.04);
   }
+  &:active {
+    transform: scale(0.96);
+  }
 }
 input {
 	font-family: "Poppins";
@@ -43,6 +46,14 @@ input {
   font-size: 14px;
   color: #ff45e0;
   margin-top: 4px;
+}
+.toast {
+  div {
+    font-family: "Poppins";
+  }
+  button {
+    min-width: auto;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),

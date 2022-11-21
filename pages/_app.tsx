@@ -8,14 +8,6 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<Web3ContextProvider>
 			<Layout>
-				{/* <Head>
-					<title>DApp - Ducky Drop</title>
-					<meta
-						name="description"
-						content="Want to send a crypto airdrop? Use Ducky Drop and massdropping crypto in a ducky way!"
-					/>
-					<link rel="icon" href="/svg/favicon.svg" />
-				</Head> */}
 				<Component {...pageProps} />
 			</Layout>
 		</Web3ContextProvider>

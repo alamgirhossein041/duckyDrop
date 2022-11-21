@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { EvmChain } from "@moralisweb3/evm-utils";
 import { EditorView } from "@codemirror/view";
 // import { useWeb3 } from "../../hooks/web3-client.js";
 import { useForm } from "react-hook-form";
 
 import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
 import Button from "../Button.js";
 import Popup from "../Popup";
 import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
+import { EvmChain } from "@moralisweb3/evm-utils";
+import { toast } from "react-toastify";
 
-interface AirdropDetailsType {
+interface AirdropDetailsProps {
 	formStep: any;
+	data?: any;
+	setData?: any;
 	nextFormStep: any;
 }
 
 export default function AirdropDetails({
 	nextFormStep,
 	formStep,
-}: AirdropDetailsType) {
+	data,
+	setData,
+}: AirdropDetailsProps) {
 	const {
 		register,
 		handleSubmit,
@@ -32,28 +37,6 @@ export default function AirdropDetails({
 		},
 	});
 
-	const [tokenInfo, setTokenInfo] = useState<any>();
-
-	async function getBalance() {
-		const address = "0xe520FB82DFB4eEad1fc69d23bbB7469Cc3F6CEa6";
-		const tokenAddresses = ["0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A"];
-		const chain = EvmChain.BSC_TESTNET;
-		await Moralis.start({
-			apiKey: process.env.MORALIS_API_KEY,
-		});
-
-		const response = await Moralis.EvmApi.token.getWalletTokenBalances({
-			address,
-			chain,
-			tokenAddresses,
-		});
-		console.log(response.raw[0]);
-		setTokenInfo(response.raw[0]);
-	}
-	useEffect(() => {
-		getBalance();
-	}, []);
-
 	const baseTheme = EditorView.baseTheme({
 		"&": {
 			border: "1px solid rgba(0, 0, 0, 0.2)",
@@ -64,17 +47,56 @@ export default function AirdropDetails({
 			borderRadius: "6px 0 0 6px",
 		},
 	});
-
 	const [popupActive, setPopupActive] = useState(false);
-	console.log(watch("token_address"));
+	const [tokenAddress, setTokenAddress] = useState("");
+	const [listOfAddress, setListOfAddress] = useState("");
+
+	function handleTokenAddressChange(e: any) {
+		setTokenAddress(e.target.value);
+	}
+
+	const [tokenInfo, setTokenInfo] = useState<any>();
+
+	async function getBalance() {
+		if (tokenAddress.length != 42) {
+			return;
+		}
+		try {
+			const address = "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB";
+			const chain = EvmChain.BSC_TESTNET;
+			const tokenAddresses = [tokenAddress];
+
+			await Moralis.start({
+				apiKey: "cMQoWJhjxBC395YFojRnnrVHZZBvJgfTqLqFiEZ7WElh2hz0vH324lUjgyueenij",
+			});
+
+			const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+				address,
+				chain,
+				tokenAddresses,
+			});
+			console.log(response);
+			setTokenInfo(response.raw[0]);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	useEffect(() => {
+		getBalance();
+	}, [tokenAddress]);
+
+	const onSubmit = (formData: any) => {
+		nextFormStep();
+		setData?.((prev: any) => ({
+			...prev,
+			tokenAddress: formData.token_address,
+			tokenSymbol: tokenInfo.symbol,
+			listOfAddress,
+		}));
+	};
 
 	return (
-		<form
-			onSubmit={handleSubmit((data) => {
-				nextFormStep();
-				console.log(data);
-			})}
-		>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<StepWrapper formStep={formStep} />
 			<div className={styles.network_wrapper}>
 				<div className={`${styles.network} ${styles.active}`}>
@@ -150,18 +172,19 @@ export default function AirdropDetails({
 			</div>
 			<div className={styles.token_address_wrapper}>
 				<p>Token Address</p>
-				<div onClick={getBalance} className={styles.form_wrapper}>
+				<div className={styles.form_wrapper}>
 					<div className={styles.input_token_address}>
 						<input
 							{...register("token_address", { required: true })}
 							type="text"
 							placeholder="Input Your Token Address   "
+							value={tokenAddress}
+							onChange={handleTokenAddressChange}
 						/>
 						{errors.token_address && (
 							<p className="error_message">Token address is required</p>
 						)}
 					</div>
-					{/* <GetBalance /> */}
 					<div className={styles.token_preview}>
 						<div className={styles.token_name}>
 							<Image
@@ -172,7 +195,6 @@ export default function AirdropDetails({
 							/>
 							<p>{tokenInfo?.symbol}</p>
 						</div>
-
 						<p>{tokenInfo?.balance}</p>
 					</div>
 				</div>
@@ -191,19 +213,34 @@ export default function AirdropDetails({
 						"\n" +
 						"30x4666a9118E2697226D93155b3f63FE830Fd0b0A1,3.11"
 					}
+					value={listOfAddress}
+					onChange={(value) => {
+						setListOfAddress(value);
+					}}
 				/>
 			</div>
-
 			<div className={styles.button_wrapper}>
 				<div className={styles.button_left}>
-					<Button color="primary">Upload CSV File</Button>
-					<Button color="light" onClick={() => setPopupActive(true)}>
+					<Button type="button" color="primary">
+						Upload CSV File
+					</Button>
+					<Button type="button" color="light" onClick={() => setPopupActive(true)}>
 						Show Example
 					</Button>
 				</div>
-				<Button type="submit" color="dark">
-					Next
-				</Button>
+				{listOfAddress == "" ? (
+					<Button
+						type="button"
+						color="dark"
+						onClick={() => toast.error("Form can't be empty")}
+					>
+						Next
+					</Button>
+				) : (
+					<Button type="submit" color="dark">
+						Next
+					</Button>
+				)}
 			</div>
 			{popupActive && (
 				<Popup>

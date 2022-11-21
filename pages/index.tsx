@@ -6,9 +6,8 @@ import Moralis from "moralis/.";
 
 export default function Home() {
 	return (
-		<div className={styles.container}>
+		<div>
 			{/* <Sidebar /> */}
-			{/* <PreventAccess /> */}
 			<Main />
 		</div>
 	);

@@ -6,25 +6,29 @@ import { useState } from "react";
 
 interface TransactionApprovalType {
   formStep: number;
+  data?: any;
+  setData?: any;
   prevFormStep: any;
   nextFormStep: any;
 }
-const listOfAddress = [
-  {
-    id: 1,
-    address: "0x4666a9118E2697226D93155b3f63FE830Fd0b0A1",
-    amount: 0.5,
-  },
-  { id: 2, address: "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB", amount: 20 },
-  {
-    id: 3,
-    address: "0x18353a0536d8304b7c4918da0B43976876627CC1",
-    amount: 3.11,
-  },
-];
+// const listOfAddress = [
+//   {
+//     id: 1,
+//     address: "0x4666a9118E2697226D93155b3f63FE830Fd0b0A1",
+//     amount: 0.5,
+//   },
+//   { id: 2, address: "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB", amount: 20 },
+//   {
+//     id: 3,
+//     address: "0x18353a0536d8304b7c4918da0B43976876627CC1",
+//     amount: 3.11,
+//   },
+// ];
 
 export default function TransactionApproval({
   formStep,
+  data,
+  setData,
   prevFormStep,
   nextFormStep,
 }: TransactionApprovalType) {
@@ -34,14 +38,34 @@ export default function TransactionApproval({
   } = useForm();
 
   const [amountType, setAmountType] = useState("amountToSend");
+  // console.log("datanya", data);
+
+  const resultAddress = [];
+  const listAmount: number[] = [];
+
+  for (let i = 0, a = data.listOfAddress.split("\n"); i < a.length; i++) {
+    const id = i + 1;
+    const addressList = a[i].split(",");
+    const recepientAddress = addressList[0];
+    const amount = addressList[1];
+    resultAddress.push({ id, recepientAddress, amount });
+    listAmount.push(Number(amount));
+  }
+  console.log("List amount:", listAmount);
+  console.log("Lengthnya", listAmount.length);
+
+  const sumAmount = listAmount?.reduce((a, b) => a + b, 0);
+  console.log("sum", sumAmount);
+
+  const onSubmit = (formData: any) => {
+    nextFormStep();
+    setData?.((prev: any) => ({
+      ...prev,
+    }));
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        nextFormStep();
-        console.log(data);
-      })}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <StepWrapper formStep={formStep} />
       <div className={styles.select_amount_wrapper}>
         <p>Select amount of tokens to approve:</p>
@@ -68,13 +92,13 @@ export default function TransactionApproval({
       </div>
       <div className={styles.airdrop_details}>
         <div className={styles.detail}>
-          <h2>3</h2>
+          <h2>{resultAddress.length}</h2>
           <p>Total recipient</p>
         </div>
         <div className={styles.detail}>
-          <h2>1.5</h2>
+          <h2>{sumAmount}</h2>
           <p>
-            Total <span>STRT</span> to send
+            Total <span>{data.tokenSymbol}</span> to send
           </p>
         </div>
         <div className={styles.detail}>
@@ -84,7 +108,7 @@ export default function TransactionApproval({
         <div className={styles.detail}>
           <h2>9,383,425</h2>
           <p>
-            Your <span>STRT</span> Balance
+            Your <span>{data.tokenSymbol}</span> Balance
           </p>
         </div>
       </div>
@@ -94,19 +118,23 @@ export default function TransactionApproval({
           <p>Token Amount</p>
         </div>
         <div className={styles.address_box}>
-          {listOfAddress.map((item) => (
+          {resultAddress.map((item: any) => (
             <div className={styles.row} key={item.id}>
               <div className={styles.content_left}>
                 <div className={styles.number}>
-                  <p>{item.id}.</p>
+                  <p>{item.id}</p>
                 </div>
-                <p>{item.address}</p>
+                <p>{item.recepientAddress}</p>
               </div>
               <p>{item.amount}</p>
             </div>
           ))}
+          {/* {amountAddress.map((item: any) => (
+            <p>{item.amount}</p>
+          ))} */}
         </div>
       </div>
+
       <div className={styles.button_wrapper}>
         <Button color="primary" onClick={prevFormStep}>
           Prev
