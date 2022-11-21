@@ -47,27 +47,87 @@ export default function Sidebar() {
     `${account.slice(0, 7)}...${account.slice(account.length - 4)}`;
 
   const [subToggle, setSubToggle] = useState(true);
+  const [isActive, setIsActive] = useState("/");
 
   return (
-    <>
-      <div className={styles.sidebar}>
-        <Image
-          src="/svg/logo.svg"
-          width={200}
-          height={50}
-          priority={true}
-          alt="Ducky Drop Logo"
-        />
-        <button className={styles.connect_button} onClick={connectWallet}>
-          {account ? shortenAddress(account) : "Connect Wallet"}
-        </button>
-        {/* <ConnectWalletButton /> */}
-        <div className={styles.menu_wrapper}>
-          <Link href="/vip-drop">
-            <div className={styles.menu}>
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>VIP Drop</p>
-              <div className={styles.icon_status}>
+    <div className={styles.sidebar}>
+      <Image
+        src="/svg/logo.svg"
+        width={200}
+        height={50}
+        priority={true}
+        alt="Ducky Drop Logo"
+      />
+      <button className={styles.connect_button} onClick={connectWallet}>
+        {account ? shortenAddress(account) : "Connect Wallet"}
+      </button>
+      {/* <ConnectWalletButton /> */}
+      <div className={styles.menu_wrapper}>
+        <Link
+          href=""
+          className={styles.link_wrapper}
+          onClick={() => toast.info("Coming Soon")}
+        >
+          <div className={styles.menu}>
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>VIP Drop</p>
+            <Image
+              src="/image/lock-circle.svg"
+              width={28}
+              height={28}
+              alt="Vip"
+            />
+          </div>
+        </Link>
+        <Link href="" className={styles.link_wrapper}>
+          <div onClick={() => setSubToggle(!subToggle)} className={styles.menu}>
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>Airdrop</p>
+            <Image
+              src="/svg/arrow-down.svg"
+              width={28}
+              height={28}
+              alt="Menu"
+            />
+          </div>
+        </Link>
+        {subToggle && (
+          <div className={styles.submenu_wrapper}>
+            <Link
+              href="/"
+              className={
+                isActive == "/"
+                  ? `${styles.link_wrapper} ${styles.active}`
+                  : styles.link_wrapper
+              }
+              onClick={() => setIsActive("/")}
+            >
+              <div className={styles.menu}>
+                <p>Simple Airdrop</p>
+              </div>
+            </Link>
+            <Link
+              href="/reusable-airdrop"
+              className={
+                isActive == "/reusable-airdrop"
+                  ? `${styles.link_wrapper} ${styles.active}`
+                  : styles.link_wrapper
+              }
+              onClick={() => setIsActive("/reusable-airdrop")}
+            >
+              <div className={styles.menu}>
+                <p>Reusable Airdrop</p>
+              </div>
+            </Link>
+            <Link
+              href=""
+              className={styles.link_wrapper}
+              onClick={() => toast.info("Coming Soon")}
+            >
+              <div className={styles.item}>
+                <div className={styles.menu}>
+                  <p>NFT Airdrop</p>
+                </div>
                 <Image
                   src="/image/lock-circle.svg"
                   width={28}
@@ -75,73 +135,59 @@ export default function Sidebar() {
                   alt="Vip"
                 />
               </div>
-            </div>
-          </Link>
-          <Link className={styles.airdrop_menu} href="/">
-            <div
-              onClick={() => setSubToggle(!subToggle)}
-              className={styles.menu}
-            >
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>Airdrop</p>
-              <Image
-                src="/svg/arrow-down.svg"
-                width={28}
-                height={28}
-                alt="Menu"
-              />
-            </div>
-          </Link>
-          {subToggle && (
-            <div className={styles.submenu_wrapper}>
-              <Link href="/" className={styles.link_wrapper}>
-                Simple Airdrop
-              </Link>
-              <Link href="/reusable-airdrop" className={styles.link_wrapper}>
-                Reusable Airdrop
-              </Link>
-              <Link href="/nft-airdrop" className={styles.link_wrapper}>
-                <div className={styles.item}>
-                  NFT Airdrop
-                  <Image
-                    src="/image/lock-circle.svg"
-                    width={28}
-                    height={28}
-                    alt="Vip"
-                  />
-                </div>
-              </Link>
-            </div>
-          )}
-          <Link href="/approval-menu" className={styles.link_wrapper}>
-            <div className={styles.menu}>
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>Approval Menu</p>
-            </div>
-          </Link>
-          <Link
-            href="/components/Verification/components/verification"
-            className={styles.link_wrapper}
-          >
-            <div className={styles.menu}>
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>Verification</p>
-            </div>
-          </Link>
-          <Link href="/ducky-hunter" className={styles.link_wrapper}>
-            <div className={styles.menu}>
-              <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-              <p>Ducky Hunter</p>
-              <Image
-                src="/image/lock-circle.svg"
-                width={28}
-                height={28}
-                alt="Vip"
-              />
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </div>
+        )}
+        <Link
+          href="/approval-menu"
+          className={
+            isActive == "/approval-menu"
+              ? `${styles.link_wrapper} ${styles.active}`
+              : styles.link_wrapper
+          }
+          onClick={() => setIsActive("/approval-menu")}
+        >
+          <div className={styles.menu}>
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>Approval Menu</p>
+          </div>
+        </Link>
+        <Link
+          href="/components/Verification/components/verification"
+          className={
+            isActive == "/verification"
+              ? `${styles.link_wrapper} ${styles.active}`
+              : styles.link_wrapper
+          }
+          onClick={() => setIsActive("/verification")}
+        >
+          <div className={styles.menu}>
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>Verification</p>
+          </div>
+        </Link>
+        <Link
+          href=""
+          className={
+            isActive == "/ducky-hunter"
+              ? `${styles.link_wrapper} ${styles.active}`
+              : styles.link_wrapper
+          }
+          onClick={() => toast.info("Coming Soon")}
+        >
+          <div className={styles.menu}>
+            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+            <p>Ducky Hunter</p>
+            <Image
+              src="/image/lock-circle.svg"
+              width={28}
+              height={28}
+              alt="Vip"
+            />
+          </div>
+        </Link>
       </div>
-    </>
+      <ToastContainer className="toast" autoClose={2000} />
+    </div>
   );
 }

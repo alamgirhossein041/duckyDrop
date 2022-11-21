@@ -4,15 +4,19 @@ import Button from "../Button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface DuckyDropProps {
   formStep: number;
+  backToHome: any;
 }
 
-export default function DuckyDrop({ formStep }: DuckyDropProps) {
+export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
   const { handleSubmit } = useForm();
   const [transactionDetails, setTransactionDetails] = useState(false);
   const [transactionDetailsView, setTransactionDetailsView] = useState(false);
+  const { push } = useRouter();
   return (
     <form
       onSubmit={handleSubmit((data) => {
@@ -78,7 +82,10 @@ export default function DuckyDrop({ formStep }: DuckyDropProps) {
           <div className={styles.transaction_status}>
             <p>DuckyDrop Transaction (1/1)</p>
             <div className={styles.box}>
-              <div className={styles.address_wrapper}>
+              <div
+                className={styles.address_wrapper}
+                onClick={() => toast.success("Address copied")}
+              >
                 <p>0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A</p>
                 <Image
                   src="/svg/copy.svg"
@@ -135,9 +142,15 @@ export default function DuckyDrop({ formStep }: DuckyDropProps) {
                 </div>
               </div>
             )}
+            <div className={styles.back_to_home}>
+              <Button color="primary" onClick={backToHome}>
+                Back to home
+              </Button>
+            </div>
           </div>
         </>
       )}
+      <ToastContainer className="toast" autoClose={2000} />
     </form>
   );
 }
