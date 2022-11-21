@@ -10,16 +10,24 @@ export default function SimpleAirdrop() {
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
   const backToHome = () => setFormStep(1);
+  const [data, setData] = useState<any>();
 
   return (
     <div className={styles.container}>
       <FormContainer currentStep={formStep}>
         {formStep == 1 && (
-          <AirdropDetails formStep={formStep} nextFormStep={nextFormStep} />
+          <AirdropDetails
+            formStep={formStep}
+            data={data}
+            setData={setData}
+            nextFormStep={nextFormStep}
+          />
         )}
         {formStep == 2 && (
           <TransactionApproval
             formStep={formStep}
+            data={data}
+            setData={data}
             nextFormStep={nextFormStep}
             prevFormStep={prevFormStep}
           />

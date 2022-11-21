@@ -9,16 +9,21 @@ import Popup from "../Popup";
 import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
+import { toast } from "react-toastify";
 
-interface AirdropDetailsType {
+interface AirdropDetailsProps {
   formStep: any;
+  data?: any;
+  setData?: any;
   nextFormStep: any;
 }
 
 export default function AirdropDetails({
   nextFormStep,
   formStep,
-}: AirdropDetailsType) {
+  data,
+  setData,
+}: AirdropDetailsProps) {
   const {
     register,
     handleSubmit,
@@ -42,13 +47,11 @@ export default function AirdropDetails({
   });
   const [popupActive, setPopupActive] = useState(false);
   const [tokenAddress, setTokenAddress] = useState("");
+  const [listOfAddress, setListOfAddress] = useState("");
 
   function handleTokenAddressChange(e: any) {
     setTokenAddress(e.target.value);
   }
-
-  console.log(tokenAddress);
-  // console.log(watch("token_address"));
 
   const [tokenInfo, setTokenInfo] = useState<any>();
 
@@ -71,8 +74,8 @@ export default function AirdropDetails({
         chain,
         tokenAddresses,
       });
+      console.log(response);
       setTokenInfo(response.raw[0]);
-      console.log(tokenInfo);
     } catch (error) {
       console.log(error);
     }
@@ -81,13 +84,18 @@ export default function AirdropDetails({
     getBalance();
   }, [tokenAddress]);
 
+  const onSubmit = (formData: any) => {
+    nextFormStep();
+    setData?.((prev: any) => ({
+      ...prev,
+      tokenAddress: formData.token_address,
+      tokenSymbol: tokenInfo.symbol,
+      listOfAddress,
+    }));
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        nextFormStep();
-        console.log(data);
-      })}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <StepWrapper formStep={formStep} />
       <div className={styles.network_wrapper}>
         <div className={`${styles.network} ${styles.active}`}>
@@ -229,6 +237,10 @@ export default function AirdropDetails({
             "\n" +
             "30x4666a9118E2697226D93155b3f63FE830Fd0b0A1,3.11"
           }
+          value={listOfAddress}
+          onChange={(value) => {
+            setListOfAddress(value);
+          }}
         />
       </div>
       <div className={styles.button_wrapper}>
@@ -244,9 +256,19 @@ export default function AirdropDetails({
             Show Example
           </Button>
         </div>
-        <Button type="submit" color="dark">
-          Next
-        </Button>
+        {listOfAddress == "" ? (
+          <Button
+            type="button"
+            color="dark"
+            onClick={() => toast.error("Form can't be empty")}
+          >
+            Next
+          </Button>
+        ) : (
+          <Button type="submit" color="dark">
+            Next
+          </Button>
+        )}
       </div>
       {popupActive && (
         <Popup>
