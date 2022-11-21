@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import { ConnectWalletButton } from "../../components/connect-button";
+// import { ConnectWalletButton } from "../../components/connect-button";
+import { ConnectWalletButton } from "../../components";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
@@ -59,8 +60,8 @@ export default function Sidebar() {
 				/>
 				{/* <button className={styles.connect_button} onClick={connectWallet}>
           {account ? shortenAddress(account) : "Connect Wallet"}
-        </button>
-        {/* <ConnectWalletButton /> */}
+        </button> */}
+				<ConnectWalletButton />
 				<div className={styles.menu_wrapper}>
 					<Link href="/vip-drop">
 						<div className={styles.menu}>

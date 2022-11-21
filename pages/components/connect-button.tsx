@@ -39,7 +39,7 @@ const DisconnectButton = ({ disconnect }: DisconnectProps) => {
 	);
 };
 
-export function ConnectWalletButton() {
+export default function ConnectWalletButton() {
 	const { web3Provider, connect, disconnect } = useWeb3Context();
 
 	return web3Provider ? (

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { EvmChain } from "@moralisweb3/evm-utils";
 import { EditorView } from "@codemirror/view";
-import { useWeb3 } from "../../hooks/web3-client.js";
+// import { useWeb3 } from "../../hooks/web3-client.js";
 import { useForm } from "react-hook-form";
+
 import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
@@ -31,27 +32,25 @@ export default function AirdropDetails({
 		},
 	});
 
-	const [isBalance, setIsBalance] = useState("");
+	const [tokenInfo, setTokenInfo] = useState<any>();
 
+	async function getBalance() {
+		const address = "0xe520FB82DFB4eEad1fc69d23bbB7469Cc3F6CEa6";
+		const tokenAddresses = ["0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A"];
+		const chain = EvmChain.BSC_TESTNET;
+		await Moralis.start({
+			apiKey: process.env.MORALIS_API_KEY,
+		});
+
+		const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+			address,
+			chain,
+			tokenAddresses,
+		});
+		console.log(response.raw[0]);
+		setTokenInfo(response.raw[0]);
+	}
 	useEffect(() => {
-		async function getBalance() {
-			const address = "0xe520FB82DFB4eEad1fc69d23bbB7469Cc3F6CEa6";
-			const tokenAddresses = ["0x28f22e9bd908055c2e8b48beb133d2dd24ad4d1a"];
-			const chain = EvmChain.BSC_TESTNET;
-			//const setIsBalance = Moralis.EvmApi.token.getWalletTokenBalances;
-
-			await Moralis.start({
-				apiKey: process.env.MORALIS_API_KEY,
-			});
-
-			const response = await Moralis.EvmApi.token.getWalletTokenBalances({
-				address,
-				chain,
-				tokenAddresses,
-			});
-			setIsBalance;
-			console.log("res", response.raw);
-		}
 		getBalance();
 	}, []);
 
@@ -65,6 +64,7 @@ export default function AirdropDetails({
 			borderRadius: "6px 0 0 6px",
 		},
 	});
+
 	const [popupActive, setPopupActive] = useState(false);
 	console.log(watch("token_address"));
 
@@ -150,7 +150,7 @@ export default function AirdropDetails({
 			</div>
 			<div className={styles.token_address_wrapper}>
 				<p>Token Address</p>
-				<div className={styles.form_wrapper}>
+				<div onClick={getBalance} className={styles.form_wrapper}>
 					<div className={styles.input_token_address}>
 						<input
 							{...register("token_address", { required: true })}
@@ -170,9 +170,10 @@ export default function AirdropDetails({
 								height={24}
 								alt="Tick green"
 							/>
-							<p>STRT</p>
+							<p>{tokenInfo?.symbol}</p>
 						</div>
-						<p>{isBalance}</p>
+
+						<p>{tokenInfo?.balance}</p>
 					</div>
 				</div>
 			</div>
@@ -192,6 +193,7 @@ export default function AirdropDetails({
 					}
 				/>
 			</div>
+
 			<div className={styles.button_wrapper}>
 				<div className={styles.button_left}>
 					<Button color="primary">Upload CSV File</Button>

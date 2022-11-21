@@ -1,11 +1,12 @@
-import React, { ReactChild, createContext, useContext } from "react";
-import { useWeb3 } from "../hooks/web3-client";
-import { Web3ProviderState, web3InitialState } from "../reducers";
+import React, { createContext, useContext } from "react";
+import { useWeb3 } from "../hooks";
+import { Web3ProviderState } from "../reducers";
+import { web3InitialState } from "../reducers";
 
 const Web3Context = createContext<Web3ProviderState>(web3InitialState);
 
 interface Props {
-	children: ReactChild;
+	children: React.ReactNode;
 }
 
 export const Web3ContextProvider = ({ children }: Props) => {
@@ -18,6 +19,6 @@ export const Web3ContextProvider = ({ children }: Props) => {
 	);
 };
 
-export function useWeb3Context() {
+export default function useWeb3Context() {
 	return useContext(Web3Context);
 }

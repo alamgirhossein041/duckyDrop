@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useReducer } from "react";
 import { ethers } from "ethers";
 import {
-	Web3ProviderState,
-	Web3Action,
+	// Web3ProviderState,
+	// Web3Action,
 	web3InitialState,
 	web3Reducer,
 } from "../reducers";
+import { Web3ProviderState, Web3Action } from "../reducers/type";
 import Web3Modal from "web3modal";
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -36,7 +37,7 @@ if (typeof window !== "undefined") {
 // 	network: () => Promise<void>;
 // };
 
-export const useWeb3 = () => {
+export default function useWeb3() {
 	const [state, dispatch] = useReducer(web3Reducer, web3InitialState);
 	const { provider, web3Provider, address, network } = state;
 
@@ -136,4 +137,4 @@ export const useWeb3 = () => {
 		connect,
 		disconnect,
 	} as Web3ProviderState;
-};
+}

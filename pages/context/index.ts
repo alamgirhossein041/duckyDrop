@@ -1,1 +1,1 @@
-export { useWeb3Context, Web3ContextProvider } from "./web3context";
+export { default as useWeb3Context, Web3ContextProvider } from "./web3context";
