@@ -18,6 +18,10 @@ export const Web3ContextProvider = ({ children }: Props) => {
   );
 };
 
-export default function useWeb3Context() {
+export function useWeb3Context() {
   return useContext(Web3Context);
+}
+
+export default function theWeb3Context() {
+  return "hi theWeb3Context";
 }

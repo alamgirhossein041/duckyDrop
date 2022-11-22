@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
 import { useWeb3 } from "../hooks/web3-client";
 import styles from "/styles/sidebar.module.scss";
-import useWeb3Context from "../context/web3context";
+import { useWeb3Context } from "../context/web3context";
 
 interface ConnectProps {
   connect: (() => Promise<void>) | null;

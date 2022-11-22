@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useReducer } from "react";
 import { ethers } from "ethers";
-import web3Reducer, {
+import {
+  web3Reducer,
   Web3ProviderState,
   Web3Action,
   web3InitialState,

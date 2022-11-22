@@ -38,7 +38,7 @@ export type Web3Action =
       type: "RESET_WEB3_PROVIDER";
     };
 
-export default function web3Reducer(
+export function web3Reducer(
   state: Web3ProviderState,
   action: Web3Action
 ): Web3ProviderState {
@@ -66,4 +66,8 @@ export default function web3Reducer(
     default:
       throw new Error();
   }
+}
+
+export default function theWeb3Provider() {
+  return "hi theWeb3Provider";
 }
