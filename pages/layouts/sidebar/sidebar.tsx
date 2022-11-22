@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 // import { useWeb3 } from "../../hooks/web3-client";
-// import { ConnectWalletButton } from "../../components/connect-button";
+import ConnectWalletButton from "../../components/connect-button";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
@@ -58,10 +58,10 @@ export default function Sidebar() {
         priority={true}
         alt="Ducky Drop Logo"
       />
-      <button className={styles.connect_button} onClick={connectWallet}>
+      {/* <button className={styles.connect_button} onClick={connectWallet}>
         {account ? shortenAddress(account) : "Connect Wallet"}
-      </button>
-      {/* <ConnectWalletButton /> */}
+      </button> */}
+      <ConnectWalletButton />
       <div className={styles.menu_wrapper}>
         <Link
           href=""

@@ -2,6 +2,7 @@ import styles from "/styles/SimpleAirdrop/DuckyDrop.module.scss";
 import StepWrapper from "../StepWrapper";
 import Button from "../Button";
 import { useState } from "react";
+import { useWeb3 } from "../../hooks/web3-client";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,31 +10,46 @@ import { useRouter } from "next/router";
 
 interface DuckyDropProps {
   formStep: number;
+  data?: any;
+  setData?: any;
   backToHome: any;
 }
 
-export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
-  const { handleSubmit } = useForm();
+export default function DuckyDrop({
+  formStep,
+  data,
+  setData,
+  backToHome,
+}: DuckyDropProps) {
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [transactionDetails, setTransactionDetails] = useState(false);
   const [transactionDetailsView, setTransactionDetailsView] = useState(false);
   const { push } = useRouter();
+
+  const onSubmit = (formData: any) => {
+    setTransactionDetails(true);
+    // setData?.((prev: any) => ({
+    //   ...prev,
+    // }));
+  };
+
+  const { address } = useWeb3();
+
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
-        setTransactionDetails(true);
-      })}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <StepWrapper formStep={formStep} />
       <div className={styles.airdrop_details}>
         <div className={styles.detail}>
-          <h2>3</h2>
+          <h2>{data?.totalRecipient}</h2>
           <p>Total recipient</p>
         </div>
         <div className={styles.detail}>
-          <h2>1.5</h2>
+          <h2>{data?.totalAmount}</h2>
           <p>
-            Total <span>STRT</span> to send
+            Total <span>{data?.tokenSymbol}</span> to send
           </p>
         </div>
         <div className={styles.detail}>
@@ -41,16 +57,17 @@ export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
           <p>Current Token Approval</p>
         </div>
         <div className={styles.detail}>
-          <h2>9,383,425</h2>
+          <h2>{data?.tokenBalance / 1000000}</h2>
           <p>
-            Your <span>STRT</span> Balance
+            Your <span>{data?.tokenSymbol}</span> Balance
           </p>
         </div>
       </div>
       <div className={styles.transaction_info}>
         <div className={styles.title}>
           <p>
-            <span>BEP20 - STRT</span> Token Airdrop Transaction Details
+            <span>BEP20 - {data?.tokenSymbol}</span> Token Airdrop Transaction
+            Details
           </p>
         </div>
         <div className={styles.row}>
@@ -63,7 +80,7 @@ export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
         </div>
         <div className={styles.row}>
           <p className={styles.label}>Sender Address</p>
-          <p>0x4666a9118E2697226D93155b3f63FE830Fd0b0A1</p>
+          <p>{address}</p>
         </div>
         <div className={`${styles.row} ${styles.bg_blue}`}>
           <p className={styles.label}>Contract Address</p>
@@ -84,7 +101,12 @@ export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
             <div className={styles.box}>
               <div
                 className={styles.address_wrapper}
-                onClick={() => toast.success("Address copied")}
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    "0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A"
+                  );
+                  toast.success("Address copied");
+                }}
               >
                 <p>0x28F22e9Bd908055C2e8b48beb133d2Dd24AD4d1A</p>
                 <Image
@@ -130,11 +152,11 @@ export default function DuckyDrop({ formStep, backToHome }: DuckyDropProps) {
                 </div>
                 <div className={`${styles.row} ${styles.bg_blue}`}>
                   <p className={styles.label}>Matched Address</p>
-                  <p>3 Address</p>
+                  <p>{data.totalRecipient} Address</p>
                 </div>
                 <div className={styles.row}>
                   <p className={styles.label}>Successfully Send</p>
-                  <p>3 Address</p>
+                  <p>{data.totalRecipient} Address</p>
                 </div>
                 <div className={`${styles.row} ${styles.bg_blue}`}>
                   <p className={styles.label}>Failed to Receive</p>
