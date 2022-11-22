@@ -70,8 +70,7 @@ export default function AirdropDetails({
       const tokenAddresses = [tokenAddress];
 
       await Moralis.start({
-        apiKey:
-          "cMQoWJhjxBC395YFojRnnrVHZZBvJgfTqLqFiEZ7WElh2hz0vH324lUjgyueenij",
+        apiKey: process.env.MORALIS_API_KEY,
       });
 
       const response = await Moralis.EvmApi.token.getWalletTokenBalances({

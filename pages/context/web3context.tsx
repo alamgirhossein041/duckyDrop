@@ -5,7 +5,7 @@ import { Web3ProviderState, web3InitialState } from "../reducers/web3-provider";
 const Web3Context = createContext<Web3ProviderState>(web3InitialState);
 
 interface Props {
-  children: ReactChild;
+  children: React.ReactNode;
 }
 
 export const Web3ContextProvider = ({ children }: Props) => {
