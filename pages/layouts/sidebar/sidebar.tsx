@@ -1,48 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-// import { ConnectWalletButton } from "../../components/connect-button";
-import { ConnectWalletButton } from "../../components";
 import { toast, ToastContainer } from "react-toastify";
+import { ConnectWallet } from "@thirdweb-dev/react";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
-	// const [isMetamaskInstalled, setIsMetamaskInstalled] =
-	//   useState<boolean>(false);
-	// const [account, setAccount] = useState<string | null>(null);
-
-	// useEffect(() => {
-	//   if ((window as any).ethereum) {
-	//     setIsMetamaskInstalled(true);
-	//   }
-	// }, []);
-
-	// async function connectWallet(): Promise<void> {
-	//   (window as any).ethereum
-	//     .request({
-	//       method: "eth_requestAccounts",
-	//     })
-	//     .then((accounts: string[]) => {
-	//       setAccount(accounts[0]);
-	//     })
-	//     .catch((error: any) => {
-	//       toast.error(`Something went wrong`);
-	//     });
-	// }
-
-	// if (account === null) {
-	// 	return (
-	// 		<>
-	// 			{isMetamaskInstalled ? (
-	// 				<>{toast.info(`Please Connect Your Metamask`)}</>
-	// 			) : (
-	// 				<>{toast.warning(`Please Install Your Metamask`)}</>
-	// 			)}
-	// 		</>
-	// 	);
-	// }
-
 	const shortenAddress = (account: string) =>
 		`${account.slice(0, 7)}...${account.slice(account.length - 4)}`;
 
@@ -61,7 +25,11 @@ export default function Sidebar() {
 				{/* <button className={styles.connect_button} onClick={connectWallet}>
           {account ? shortenAddress(account) : "Connect Wallet"}
         </button> */}
-				<ConnectWalletButton />
+				<ConnectWallet
+					className="connect_button"
+					accentColor="orange"
+					colorMode="light"
+				/>
 				<div className={styles.menu_wrapper}>
 					<Link href="/vip-drop">
 						<div className={styles.menu}>
