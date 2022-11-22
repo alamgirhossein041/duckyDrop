@@ -262,7 +262,7 @@ export default function AirdropDetails({
             Show Example
           </Button>
         </div>
-        {listOfAddress == "" ? (
+        {listOfAddress == null ? (
           <Button
             type="button"
             color="dark"
