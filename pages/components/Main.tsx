@@ -5,7 +5,7 @@ import ConnectWallet from "./ConnectWallet";
 export default function Main() {
 	return (
 		<div className={styles.container}>
-			{false ? <SimpleAirdrop /> : <ConnectWallet />}
+			{true ? <SimpleAirdrop /> : <ConnectWallet />}
 		</div>
 	);
 }

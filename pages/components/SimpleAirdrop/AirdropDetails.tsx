@@ -12,6 +12,7 @@ import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
 import { toast } from "react-toastify";
+import { useWeb3 } from "../../hooks/web3-client";
 
 interface AirdropDetailsProps {
 	formStep: any;
@@ -48,8 +49,8 @@ export default function AirdropDetails({
 		},
 	});
 	const [popupActive, setPopupActive] = useState(false);
-	const [tokenAddress, setTokenAddress] = useState("");
-	const [listOfAddress, setListOfAddress] = useState("");
+	const [tokenAddress, setTokenAddress] = useState<any>();
+	const [listOfAddress, setListOfAddress] = useState<any>();
 
 	function handleTokenAddressChange(e: any) {
 		setTokenAddress(e.target.value);
@@ -57,17 +58,21 @@ export default function AirdropDetails({
 
 	const [tokenInfo, setTokenInfo] = useState<any>();
 
+	const { address } = useWeb3();
+	const addressUser = address;
+
 	async function getBalance() {
-		if (tokenAddress.length != 42) {
+		if (tokenAddress?.length != 42) {
 			return;
 		}
 		try {
-			const address = "0x49fC7F7E4FFd2a7C6066E51946E58D0Ec6DDaAfB";
+			const address = `${addressUser}`;
+			console.log(address);
 			const chain = EvmChain.BSC_TESTNET;
 			const tokenAddresses = [tokenAddress];
 
 			await Moralis.start({
-				apiKey: "cMQoWJhjxBC395YFojRnnrVHZZBvJgfTqLqFiEZ7WElh2hz0vH324lUjgyueenij",
+				apiKey: process.env.MORALIS_API_KEY,
 			});
 
 			const response = await Moralis.EvmApi.token.getWalletTokenBalances({
@@ -75,7 +80,6 @@ export default function AirdropDetails({
 				chain,
 				tokenAddresses,
 			});
-			console.log(response);
 			setTokenInfo(response.raw[0]);
 		} catch (error) {
 			console.log(error);
@@ -90,7 +94,8 @@ export default function AirdropDetails({
 		setData?.((prev: any) => ({
 			...prev,
 			tokenAddress: formData.token_address,
-			tokenSymbol: tokenInfo.symbol,
+			tokenSymbol: tokenInfo?.symbol,
+			tokenBalance: tokenInfo?.balance,
 			listOfAddress,
 		}));
 	};
@@ -187,15 +192,17 @@ export default function AirdropDetails({
 					</div>
 					<div className={styles.token_preview}>
 						<div className={styles.token_name}>
-							<Image
-								src={"/svg/tick-green.svg"}
-								width={24}
-								height={24}
-								alt="Tick green"
-							/>
-							<p>{tokenInfo?.symbol}</p>
+							{tokenInfo && (
+								<Image
+									src={"/svg/tick-green.svg"}
+									width={24}
+									height={24}
+									alt="Tick green"
+								/>
+							)}
+							<p>{tokenInfo ? tokenInfo?.symbol : "Token Symbol"}</p>
 						</div>
-						<p>{tokenInfo?.balance}</p>
+						<p>{tokenInfo ? tokenInfo?.balance / 1000000 : "Balance"}</p>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,6 @@
 import { useEffect, useState, useContext } from "react";
+// import { useWeb3 } from "../../hooks/web3-client";
+import ConnectWalletButton from "../../components/connect-button";
 import { toast, ToastContainer } from "react-toastify";
 import { ConnectWallet } from "@thirdweb-dev/react";
 import "react-toastify/dist/ReactToastify.css";
