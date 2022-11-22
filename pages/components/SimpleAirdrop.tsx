@@ -27,13 +27,18 @@ export default function SimpleAirdrop() {
           <TransactionApproval
             formStep={formStep}
             data={data}
-            setData={data}
+            setData={setData}
             nextFormStep={nextFormStep}
             prevFormStep={prevFormStep}
           />
         )}
         {formStep == 3 && (
-          <DuckyDrop formStep={formStep} backToHome={backToHome} />
+          <DuckyDrop
+            formStep={formStep}
+            data={data}
+            setData={setData}
+            backToHome={backToHome}
+          />
         )}
       </FormContainer>
     </div>

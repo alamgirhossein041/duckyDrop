@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useReducer } from "react";
 import { ethers } from "ethers";
-import {
+import web3Reducer, {
   Web3ProviderState,
   Web3Action,
   web3InitialState,
-  web3Reducer,
-} from "../reducers";
+} from "../reducers/web3-provider";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
@@ -136,3 +135,7 @@ export const useWeb3 = () => {
     disconnect,
   } as Web3ProviderState;
 };
+
+export default function thisUseWeb3() {
+  return "hello web3";
+}
