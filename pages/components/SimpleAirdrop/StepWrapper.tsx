@@ -1,4 +1,4 @@
-import styles from "/styles/StepWrapper.module.scss";
+import styles from "/styles/SimpleAirdrop/StepWrapper.module.scss";
 
 interface StepWrapperProps {
   formStep?: number;

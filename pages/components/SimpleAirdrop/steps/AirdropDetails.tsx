@@ -1,16 +1,16 @@
-import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
+import styles from "/styles/SimpleAirdrop/steps/AirdropDetails.module.scss";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "@codemirror/view";
-import Button from "../Button.js";
+import Button from "../../Button.js";
 import { useForm } from "react-hook-form";
-import Popup from "../Popup";
+import Popup from "../../Popup";
 import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
 import { toast } from "react-toastify";
-import { useWeb3 } from "../../hooks/web3-client";
+import { useWeb3 } from "../../../hooks/web3-client";
 
 interface AirdropDetailsProps {
   formStep: any;
@@ -20,8 +20,8 @@ interface AirdropDetailsProps {
 }
 
 export default function AirdropDetails({
-  nextFormStep,
   formStep,
+  nextFormStep,
   data,
   setData,
 }: AirdropDetailsProps) {
@@ -47,8 +47,8 @@ export default function AirdropDetails({
     },
   });
   const [popupActive, setPopupActive] = useState(false);
-  const [tokenAddress, setTokenAddress] = useState<any>();
-  const [listOfAddress, setListOfAddress] = useState<any>();
+  const [tokenAddress, setTokenAddress] = useState<any>("");
+  const [listOfAddress, setListOfAddress] = useState<any>("");
 
   function handleTokenAddressChange(e: any) {
     setTokenAddress(e.target.value);
@@ -262,7 +262,7 @@ export default function AirdropDetails({
             Show Example
           </Button>
         </div>
-        {listOfAddress == "" ? (
+        {listOfAddress == null ? (
           <Button
             type="button"
             color="dark"

@@ -1,8 +1,8 @@
-import styles from "/styles/SimpleAirdrop/DuckyDrop.module.scss";
+import styles from "/styles/SimpleAirdrop/steps/DuckyDrop.module.scss";
 import StepWrapper from "../StepWrapper";
-import Button from "../Button";
+import Button from "../../Button";
 import { useState } from "react";
-import { useWeb3 } from "../../hooks/web3-client";
+import { useWeb3 } from "../../../hooks/web3-client";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast, ToastContainer } from "react-toastify";
