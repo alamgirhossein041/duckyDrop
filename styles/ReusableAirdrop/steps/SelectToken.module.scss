@@ -1,0 +1,125 @@
+.network_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  .network {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #ff45e0;
+    border-radius: 6px;
+    padding: 24px;
+    cursor: pointer;
+    &.active {
+      background: #ff45e0;
+      p {
+        color: #fff;
+        opacity: 1;
+      }
+    }
+    &.disable {
+      border-color: rgba(0, 0, 0, 0.1);
+      cursor: no-drop;
+      p {
+        color: rgba(0, 0, 0, 0.2);
+        opacity: 1;
+      }
+    }
+    p {
+      font-weight: 600;
+      color: #ff45e0;
+      opacity: 0.5;
+    }
+    .icon_network {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      .padlock {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+.input_token_address_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 64px 0;
+  .form_wrapper {
+    display: flex;
+    gap: 16px;
+    .input_token_address {
+      flex: 1;
+      input {
+        width: 100%;
+        height: 56px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+      }
+    }
+    Button {
+      min-width: 280px;
+    }
+  }
+}
+.token_available {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .label {
+    display: grid;
+    grid-template-columns: 20% 20% 40% 20%;
+    padding: 0 48px;
+    p {
+      font-weight: 500;
+    }
+  }
+  .box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 24px;
+    .item {
+      display: grid;
+      grid-template-columns: 20% 20% 40% 20%;
+      align-items: center;
+      border-radius: 4px;
+      padding: 16px 24px;
+      &.bg_gray {
+        background: rgba(0, 0, 0, 0.05);
+      }
+      .symbol {
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.8);
+      }
+      p {
+        color: rgba(0, 0, 0, 0.6);
+      }
+      .action_button {
+        display: flex;
+        justify-content: flex-end;
+        button {
+          min-width: 140px;
+          font-size: 14px;
+          color: #fff;
+          background: radial-gradient(
+            100% 100% at 50% 0%,
+            #ff9def 14.47%,
+            #ff12e7 50.07%,
+            #eb00b7 100%
+          );
+          padding: 12px;
+        }
+      }
+    }
+  }
+}
