@@ -2,192 +2,98 @@ import { useEffect, useState, useContext } from "react";
 // import { useWeb3 } from "../../hooks/web3-client";
 import ConnectWalletButton from "../../components/connect-button";
 import { toast, ToastContainer } from "react-toastify";
+import { ConnectWallet, useSDK } from "@thirdweb-dev/react";
+import { useChainId } from "@thirdweb-dev/react";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import styles from "/styles/sidebar.module.scss";
 import Image from "next/image";
 
 export default function Sidebar() {
-  const [isMetamaskInstalled, setIsMetamaskInstalled] =
-    useState<boolean>(false);
-  const [account, setAccount] = useState<string | null>(null);
+	const shortenAddress = (account: string) =>
+		`${account.slice(0, 7)}...${account.slice(account.length - 4)}`;
 
-  useEffect(() => {
-    if ((window as any).ethereum) {
-      setIsMetamaskInstalled(true);
-    }
-  }, []);
+	const [subToggle, setSubToggle] = useState(true);
 
-  async function connectWallet(): Promise<void> {
-    (window as any).ethereum
-      .request({
-        method: "eth_requestAccounts",
-      })
-      .then((accounts: string[]) => {
-        setAccount(accounts[0]);
-      })
-      .catch((error: any) => {
-        toast.error(`Something went wrong`);
-      });
-  }
+	return (
+		<>
+			<div className={styles.sidebar}>
+				<Image
+					src="/svg/logo.svg"
+					width={200}
+					height={50}
+					priority={true}
+					alt="Ducky Drop Logo"
+				/>
 
-  // if (account === null) {
-  // 	return (
-  // 		<>
-  // 			{isMetamaskInstalled ? (
-  // 				<>{toast.info(`Please Connect Your Metamask`)}</>
-  // 			) : (
-  // 				<>{toast.warning(`Please Install Your Metamask`)}</>
-  // 			)}
-  // 		</>
-  // 	);
-  // }
-
-  const shortenAddress = (account: string) =>
-    `${account.slice(0, 7)}...${account.slice(account.length - 4)}`;
-
-  const [subToggle, setSubToggle] = useState(true);
-  const [isActive, setIsActive] = useState("/");
-
-  return (
-    <div className={styles.sidebar}>
-      <Image
-        src="/svg/logo.svg"
-        width={200}
-        height={50}
-        priority={true}
-        alt="Ducky Drop Logo"
-      />
-      {/* <button className={styles.connect_button} onClick={connectWallet}>
-        {account ? shortenAddress(account) : "Connect Wallet"}
-      </button> */}
-      <ConnectWalletButton />
-      <div className={styles.menu_wrapper}>
-        <Link
-          href=""
-          className={styles.link_wrapper}
-          onClick={() => toast.info("Coming Soon")}
-        >
-          <div className={styles.menu}>
-            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-            <p>VIP Drop</p>
-            <Image
-              src="/image/lock-circle.svg"
-              width={28}
-              height={28}
-              alt="Vip"
-            />
-          </div>
-        </Link>
-        <Link href="" className={styles.link_wrapper}>
-          <div onClick={() => setSubToggle(!subToggle)} className={styles.menu}>
-            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-            <p>Airdrop</p>
-            <Image
-              src="/svg/arrow-down.svg"
-              width={28}
-              height={28}
-              alt="Menu"
-            />
-          </div>
-        </Link>
-        {subToggle && (
-          <div className={styles.submenu_wrapper}>
-            <Link
-              href="/"
-              className={
-                isActive == "/"
-                  ? `${styles.link_wrapper} ${styles.active}`
-                  : styles.link_wrapper
-              }
-              onClick={() => setIsActive("/")}
-            >
-              <div className={styles.menu}>
-                <p>Simple Airdrop</p>
-              </div>
-            </Link>
-            <Link
-              href="/reusable-airdrop"
-              className={
-                isActive == "/reusable-airdrop"
-                  ? `${styles.link_wrapper} ${styles.active}`
-                  : styles.link_wrapper
-              }
-              onClick={() => setIsActive("/reusable-airdrop")}
-            >
-              <div className={styles.menu}>
-                <p>Reusable Airdrop</p>
-              </div>
-            </Link>
-            <Link
-              href=""
-              className={styles.link_wrapper}
-              onClick={() => toast.info("Coming Soon")}
-            >
-              <div className={styles.item}>
-                <div className={styles.menu}>
-                  <p>NFT Airdrop</p>
-                </div>
-                <Image
-                  src="/image/lock-circle.svg"
-                  width={28}
-                  height={28}
-                  alt="Vip"
-                />
-              </div>
-            </Link>
-          </div>
-        )}
-        <Link
-          href="/approval-menu"
-          className={
-            isActive == "/approval-menu"
-              ? `${styles.link_wrapper} ${styles.active}`
-              : styles.link_wrapper
-          }
-          onClick={() => setIsActive("/approval-menu")}
-        >
-          <div className={styles.menu}>
-            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-            <p>Approval Menu</p>
-          </div>
-        </Link>
-        <Link
-          href="/components/Verification/components/verification"
-          className={
-            isActive == "/verification"
-              ? `${styles.link_wrapper} ${styles.active}`
-              : styles.link_wrapper
-          }
-          onClick={() => setIsActive("/verification")}
-        >
-          <div className={styles.menu}>
-            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-            <p>Verification</p>
-          </div>
-        </Link>
-        <Link
-          href=""
-          className={
-            isActive == "/ducky-hunter"
-              ? `${styles.link_wrapper} ${styles.active}`
-              : styles.link_wrapper
-          }
-          onClick={() => toast.info("Coming Soon")}
-        >
-          <div className={styles.menu}>
-            <Image src="/image/star.svg" width={28} height={28} alt="Menu" />
-            <p>Ducky Hunter</p>
-            <Image
-              src="/image/lock-circle.svg"
-              width={28}
-              height={28}
-              alt="Vip"
-            />
-          </div>
-        </Link>
-      </div>
-      <ToastContainer className="toast" autoClose={2000} />
-    </div>
-  );
+				<ConnectWallet
+					className={styles.connect_button}
+					colorMode="light"
+					// auth={{
+					// 	loginConfig: {
+					// 		redirectTo: "/",
+					// 		onError: (error: string) => <ConnectWallet />,
+					// 	},
+					// 	loginOptional: false,
+					// }}
+				/>
+				<div className={styles.menu_wrapper}>
+					<Link href="/vip-drop" className={styles.link_wrapper}>
+						<div className={styles.menu}>
+							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+							<p>VIP Drop</p>
+							<div className={styles.icon_status}>
+								<Image src="/image/lock-circle.svg" width={28} height={28} alt="Vip" />
+							</div>
+						</div>
+					</Link>
+					<Link className={styles.link_wrapper} href="/">
+						<div onClick={() => setSubToggle(!subToggle)} className={styles.menu}>
+							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+							<p>Airdrop</p>
+							<Image src="/svg/arrow-down.svg" width={28} height={28} alt="Menu" />
+						</div>
+					</Link>
+					{subToggle && (
+						<div className={styles.submenu_wrapper}>
+							<Link href="/" className={styles.link_wrapper}>
+								Simple Airdrop
+							</Link>
+							<Link href="/reusable-airdrop" className={styles.link_wrapper}>
+								Reusable Airdrop
+							</Link>
+							<Link href="/nft-airdrop" className={styles.link_wrapper}>
+								<div className={styles.item}>
+									NFT Airdrop
+									<Image src="/image/lock-circle.svg" width={28} height={28} alt="Vip" />
+								</div>
+							</Link>
+						</div>
+					)}
+					<Link href="/approval-menu" className={styles.link_wrapper}>
+						<div className={styles.menu}>
+							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+							<p>Approval Menu</p>
+						</div>
+					</Link>
+					<Link
+						href="/components/Verification/components/verification"
+						className={styles.link_wrapper}
+					>
+						<div className={styles.menu}>
+							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+							<p>Verification</p>
+						</div>
+					</Link>
+					<Link href="/ducky-hunter" className={styles.link_wrapper}>
+						<div className={styles.menu}>
+							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
+							<p>Ducky Hunter</p>
+							<Image src="/image/lock-circle.svg" width={28} height={28} alt="Vip" />
+						</div>
+					</Link>
+				</div>
+			</div>
+		</>
+	);
 }

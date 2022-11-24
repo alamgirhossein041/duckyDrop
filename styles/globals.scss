@@ -17,6 +17,7 @@ a {
   margin: 0;
   box-sizing: border-box;
 }
+
 a {
   text-decoration: none;
 }
@@ -34,12 +35,12 @@ button {
   }
 }
 input {
-  font-family: "Poppins";
-  outline: none;
-  padding: 16px;
-  &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
-  }
+	font-family: "Poppins";
+	outline: none;
+	padding: 16px;
+	&::placeholder {
+		color: rgba(0, 0, 0, 0.4);
+	}
 }
 .error_message {
   font-size: 14px;
