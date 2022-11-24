@@ -9,7 +9,7 @@ import {
 	useSDK,
 	useTokenSupply,
 } from "@thirdweb-dev/react";
-import { StrtABI } from "../../contracts";
+import { StrtABI } from "../../../contracts";
 
 interface TransactionApprovalType {
 	formStep: number;
