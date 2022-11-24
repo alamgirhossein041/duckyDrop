@@ -1,0 +1,479 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_airdrop",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_creator",
+        "type": "address"
+      }
+    ],
+    "name": "AirdropCreated",
+    "type": "event",
+    "signature": "0xe9d3c17fe1abc34320923960d6d4ad8f1cdfef18200f519b215f7e163b0dc85a"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "AirdropReceived",
+    "type": "event",
+    "signature": "0xf88d3e8b62ca3b53dfaaee74ea167450fddfe8f6784b2e62c9f2597442a8c933"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "NetworkFeeWithdrawed",
+    "type": "event",
+    "signature": "0x6104405ec5bca43f70fcf4823fc911090b7a208638303b967344ad35800d8543"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "NetworkPlatformFeeAirdropInstantChanged",
+    "type": "event",
+    "signature": "0x64141149f73b1f6fc6b707a9719697e6f9d912a8abe626daf23110bcb4f23db6"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "NetworkPlatformFeeChanged",
+    "type": "event",
+    "signature": "0x695a2d5f7d26290a1b6b4505078c3daa62eaaa7ddf8b706927db529c96822b0e"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event",
+    "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "_type",
+        "type": "uint8"
+      }
+    ],
+    "name": "PlatformFeeTypeChanged",
+    "type": "event",
+    "signature": "0x23ae95f1e9624d929815836898751c8f5b2903064235e353ba60b8421cf48f27"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "_type",
+        "type": "uint8"
+      }
+    ],
+    "name": "PlatformFeeTypeChangedAirdropInstant",
+    "type": "event",
+    "signature": "0xfb3e5abd2568e6e95fb0a6ea013034a4b282f9165b6bc583de64e64e7591a59e"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "StrtPlatformFeeAirdropInstantChanged",
+    "type": "event",
+    "signature": "0x93adc67681096825db30df301f16e6809a00ef9ae5afd0459402c9a98fe8f96d"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "StrtPlatformFeeChanged",
+    "type": "event",
+    "signature": "0x5a94831237587d75fdf5cdd9d033feff02b13ca4cf69d869c82f81aea00f2751"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "StrtPlatformFeeWithdrawed",
+    "type": "event",
+    "signature": "0x8444b92374de797dadc3b28a8a9b7dafad27bf3c128de7060cdaa62dd3d70a53"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_addr",
+        "type": "address"
+      }
+    ],
+    "name": "TokenFeeAddressChanged",
+    "type": "event",
+    "signature": "0xfc263fff561b4a677f96961f02b8acaf6e7f2aca9fcdcdb706b65b54bae47bd1"
+  },
+  {
+    "inputs": [],
+    "name": "currentPlatformFeeType",
+    "outputs": [
+      {
+        "internalType": "enum AirdropFactory_V1_5.PlatformFeeType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xe7b32906"
+  },
+  {
+    "inputs": [],
+    "name": "currentPlatformFeeTypeAirdropInstant",
+    "outputs": [
+      {
+        "internalType": "enum AirdropFactory_V1_5.PlatformFeeType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x33afe928"
+  },
+  {
+    "inputs": [],
+    "name": "networkPlatformFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x8c35e37f"
+  },
+  {
+    "inputs": [],
+    "name": "networkPlatformFeeAirdropInstant",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xa92c2e00"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x8da5cb5b"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x715018a6"
+  },
+  {
+    "inputs": [],
+    "name": "strtPlatformFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x3ff09b0f"
+  },
+  {
+    "inputs": [],
+    "name": "strtPlatformFeeAirdropInstant",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x2113f87c"
+  },
+  {
+    "inputs": [],
+    "name": "strtToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20Upgradeable",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x05977785"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf2fde38b"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "userAirdropList",
+    "outputs": [
+      {
+        "internalType": "contract AirdropInstant_V1_3",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xded52683"
+  },
+  {
+    "inputs": [],
+    "name": "init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe1c7392a"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "changeTokenFeeAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x63718214"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "name": "changeNetworkPlatformFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x354ed0ac"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "name": "changeStrtPlatformFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe55b2f5d"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "name": "changeNetworkPlatformFeeAirdropInstant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x06190ac3"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "name": "changeStrtPlatformFeeAirdropInstant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x518abe6f"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "withdrawNetworkFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x661c06bb"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "withdrawStrtPlatformFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x73df3900"
+  },
+  {
+    "inputs": [{ "internalType": "uint8", "name": "_type", "type": "uint8" }],
+    "name": "changePlatformFeeType",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x94c1aaa9"
+  },
+  {
+    "inputs": [{ "internalType": "uint8", "name": "_type", "type": "uint8" }],
+    "name": "changePlatformFeeTypeAirdropInstant",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xff8218de"
+  },
+  {
+    "inputs": [],
+    "name": "getBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x12065fe0"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_tokenAddr", "type": "address" }
+    ],
+    "name": "createAirdrop",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true,
+    "signature": "0xeb755a90"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "_addr", "type": "address[]" },
+      { "internalType": "uint256[]", "name": "_amt", "type": "uint256[]" },
+      { "internalType": "address", "name": "_tokenAddr", "type": "address" }
+    ],
+    "name": "Airdrop",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true,
+    "signature": "0x8eeba4cb"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_start", "type": "uint256" },
+      { "internalType": "uint256", "name": "_end", "type": "uint256" }
+    ],
+    "name": "getMyAirdropList",
+    "outputs": [
+      {
+        "internalType": "contract AirdropInstant_V1_3[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xa3c05332"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "getAirdropLengthByAddr",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xeb6b2861"
+  },
+  {
+    "inputs": [],
+    "name": "getOwnAirdropLength",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xa3502b51"
+  }
+]

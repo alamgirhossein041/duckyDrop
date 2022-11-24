@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import styles from "/styles/SimpleAirdrop/DuckyDrop.module.scss";
@@ -9,6 +9,8 @@ import { useWeb3 } from "../../hooks/web3-client";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { SDKOptionsSchema } from "@thirdweb-dev/sdk";
+import { useSDK } from "@thirdweb-dev/react";
 
 interface DuckyDropProps {
 	formStep: number;
@@ -29,6 +31,7 @@ export default function DuckyDrop({
 	} = useForm();
 	const [transactionDetails, setTransactionDetails] = useState(false);
 	const [transactionDetailsView, setTransactionDetailsView] = useState(false);
+	const [nativeBalance, setNativeBalance] = useState<any>();
 	const { push } = useRouter();
 
 	const onSubmit = (formData: any) => {
@@ -39,6 +42,22 @@ export default function DuckyDrop({
 	};
 
 	const { address } = useWeb3();
+
+	// const balance = "0xe520FB82DFB4eEad1fc69d23bbB7469Cc3F6CEa6";
+
+	const sdk = useSDK();
+
+	async function getNativeBalance() {
+		const nativeBalance = await sdk?.wallet.balance();
+		setNativeBalance(nativeBalance);
+		console.log(nativeBalance);
+	}
+	useEffect(() => {
+		getNativeBalance();
+	}, []);
+
+	const testing = "BLABLABLB";
+	console.log(testing);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -77,7 +96,7 @@ export default function DuckyDrop({
 				</div>
 				<div className={`${styles.row} ${styles.bg_blue}`}>
 					<p className={styles.label}>Your BNBT Balance</p>
-					<p>2,98988 BNBT</p>
+					<p>{nativeBalance?.displayValue}</p>
 				</div>
 				<div className={styles.row}>
 					<p className={styles.label}>Sender Address</p>

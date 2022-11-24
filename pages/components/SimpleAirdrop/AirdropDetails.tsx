@@ -1,18 +1,21 @@
 import { EditorView } from "@codemirror/view";
-// import { useWeb3 } from "../../hooks/web3-client.js";
 import { useForm } from "react-hook-form";
-
 import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
 import { useEffect, useState } from "react";
+import { EvmChain } from "@moralisweb3/evm-utils";
+import { toast } from "react-toastify";
+import {
+	useChainId,
+	useNetwork,
+	ChainId,
+	useAddress,
+} from "@thirdweb-dev/react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
 import Button from "../Button.js";
 import Popup from "../Popup";
 import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/evm-utils";
-import { toast } from "react-toastify";
-import { useWeb3 } from "../../hooks/web3-client";
 
 interface AirdropDetailsProps {
 	formStep: any;
@@ -38,6 +41,10 @@ export default function AirdropDetails({
 		},
 	});
 
+	const chainIdCurrent = useChainId();
+
+	const [, switchNetwork] = useNetwork();
+
 	const baseTheme = EditorView.baseTheme({
 		"&": {
 			border: "1px solid rgba(0, 0, 0, 0.2)",
@@ -58,7 +65,8 @@ export default function AirdropDetails({
 
 	const [tokenInfo, setTokenInfo] = useState<any>();
 
-	const { address } = useWeb3();
+	// const { address } = useWeb3();
+	const address = useAddress();
 	const addressUser = address;
 
 	async function getBalance() {
@@ -104,19 +112,47 @@ export default function AirdropDetails({
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<StepWrapper formStep={formStep} />
 			<div className={styles.network_wrapper}>
-				<div className={`${styles.network} ${styles.active}`}>
-					<Image
-						src="/svg/network-ethereum-active.svg"
-						width={48}
-						height={48}
-						alt="Logo Ethereum"
-					/>
-					<p>Ethereum</p>
-				</div>
-				<div className={styles.network}>
-					<Image src="/svg/network-bnb.svg" width={48} height={48} alt="Logo BNB" />
-					<p>BNB</p>
-				</div>
+				{chainIdCurrent === 1 ? (
+					<div className={`${styles.network} ${styles.active}`}>
+						<Image
+							src="/svg/network-ethereum-active.svg"
+							width={48}
+							height={48}
+							alt="Logo Ethereum"
+						/>
+						<p>Ethereum</p>
+					</div>
+				) : (
+					<div
+						onClick={() => switchNetwork?.(ChainId.Mainnet)}
+						className={`${styles.network}`}
+					>
+						<Image
+							src="/svg/network-ethereum-active.svg"
+							width={48}
+							height={48}
+							alt="Logo Ethereum"
+						/>
+						<p>Ethereum</p>
+					</div>
+				)}
+				{chainIdCurrent === 97 ? (
+					<div
+						onClick={() => switchNetwork?.(ChainId.BinanceSmartChainTestnet)}
+						className={`${styles.network} ${styles.active}`}
+					>
+						<Image src="/svg/network-bnb.svg" width={48} height={48} alt="Logo BNB" />
+						<p>BNB</p>
+					</div>
+				) : (
+					<div
+						onClick={() => switchNetwork?.(ChainId.BinanceSmartChainTestnet)}
+						className={styles.network}
+					>
+						<Image src="/svg/network-bnb.svg" width={48} height={48} alt="Logo BNB" />
+						<p>BNB</p>
+					</div>
+				)}
 				<div className={`${styles.network} ${styles.disable}`}>
 					<div className={styles.icon_network}>
 						<Image

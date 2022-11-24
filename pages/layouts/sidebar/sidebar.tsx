@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react";
 // import { useWeb3 } from "../../hooks/web3-client";
 import ConnectWalletButton from "../../components/connect-button";
 import { toast, ToastContainer } from "react-toastify";
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, useSDK } from "@thirdweb-dev/react";
+import { useChainId } from "@thirdweb-dev/react";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import styles from "/styles/sidebar.module.scss";
@@ -24,16 +25,20 @@ export default function Sidebar() {
 					priority={true}
 					alt="Ducky Drop Logo"
 				/>
-				{/* <button className={styles.connect_button} onClick={connectWallet}>
-          {account ? shortenAddress(account) : "Connect Wallet"}
-        </button> */}
+
 				<ConnectWallet
-					className="connect_button"
-					accentColor="orange"
+					className={styles.connect_button}
 					colorMode="light"
+					// auth={{
+					// 	loginConfig: {
+					// 		redirectTo: "/",
+					// 		onError: (error: string) => <ConnectWallet />,
+					// 	},
+					// 	loginOptional: false,
+					// }}
 				/>
 				<div className={styles.menu_wrapper}>
-					<Link href="/vip-drop">
+					<Link href="/vip-drop" className={styles.link_wrapper}>
 						<div className={styles.menu}>
 							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
 							<p>VIP Drop</p>
@@ -42,7 +47,7 @@ export default function Sidebar() {
 							</div>
 						</div>
 					</Link>
-					<Link className={styles.airdrop_menu} href="/">
+					<Link className={styles.link_wrapper} href="/">
 						<div onClick={() => setSubToggle(!subToggle)} className={styles.menu}>
 							<Image src="/image/star.svg" width={28} height={28} alt="Menu" />
 							<p>Airdrop</p>
