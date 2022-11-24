@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import styles from "/styles/SimpleAirdrop/DuckyDrop.module.scss";
+import styles from "/styles/SimpleAirdrop/steps/DuckyDrop.module.scss";
 import StepWrapper from "../StepWrapper";
-import Button from "../Button";
-
-import { useWeb3 } from "../../hooks/web3-client";
-
+import Button from "../../Button";
+import { useState, useEffect } from "react";
+import { useWeb3 } from "../../../hooks/web3-client";
+import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { SDKOptionsSchema } from "@thirdweb-dev/sdk";
 import { useSDK } from "@thirdweb-dev/react";
+import { toast, ToastContainer } from "react-toastify";
 
 interface DuckyDropProps {
 	formStep: number;

@@ -1,9 +1,6 @@
-import { EditorView } from "@codemirror/view";
-import { useForm } from "react-hook-form";
-import styles from "/styles/SimpleAirdrop/AirdropDetails.module.scss";
+import styles from "/styles/SimpleAirdrop/steps/AirdropDetails.module.scss";
 import { useEffect, useState } from "react";
-import { EvmChain } from "@moralisweb3/evm-utils";
-import { toast } from "react-toastify";
+
 import {
 	useChainId,
 	useNetwork,
@@ -12,10 +9,15 @@ import {
 } from "@thirdweb-dev/react";
 import Image from "next/image";
 import CodeMirror from "@uiw/react-codemirror";
-import Button from "../Button.js";
-import Popup from "../Popup";
+import { EditorView } from "@codemirror/view";
+import Button from "../../Button.js";
+import { useForm } from "react-hook-form";
+import Popup from "../../Popup";
 import StepWrapper from "../StepWrapper";
 import Moralis from "moralis";
+import { EvmChain } from "@moralisweb3/evm-utils";
+import { toast } from "react-toastify";
+import { useWeb3 } from "../../../hooks/web3-client";
 
 interface AirdropDetailsProps {
 	formStep: any;
@@ -25,8 +27,8 @@ interface AirdropDetailsProps {
 }
 
 export default function AirdropDetails({
-	nextFormStep,
 	formStep,
+	nextFormStep,
 	data,
 	setData,
 }: AirdropDetailsProps) {

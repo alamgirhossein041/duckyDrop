@@ -1,9 +1,9 @@
 import styles from "/styles/SimpleAirdrop.module.scss";
 import { useState } from "react";
 import FormContainer from "./FormContainer";
-import AirdropDetails from "./SimpleAirdrop/AirdropDetails";
-import TransactionApproval from "./SimpleAirdrop/TransactionApproval";
-import DuckyDrop from "./SimpleAirdrop/DuckyDrop";
+import AirdropDetails from "./SimpleAirdrop/steps/AirdropDetails";
+import TransactionApproval from "./SimpleAirdrop/steps/TransactionApproval";
+import DuckyDrop from "./SimpleAirdrop/steps/DuckyDrop";
 
 export default function SimpleAirdrop() {
 	const [formStep, setFormStep] = useState(1);

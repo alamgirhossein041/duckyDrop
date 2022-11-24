@@ -1,6 +1,6 @@
-import styles from "/styles/SimpleAirdrop/TransactionApproval.module.scss";
+import styles from "/styles/SimpleAirdrop/steps/TransactionApproval.module.scss";
 import StepWrapper from "../StepWrapper";
-import Button from "../Button";
+import Button from "../../Button";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import {
